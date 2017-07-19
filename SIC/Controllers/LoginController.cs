@@ -25,14 +25,13 @@ namespace SIC.Controllers
                     var v = db.usuarios.Where(a => a.id_Emp.Equals(u.id_Emp) && a.contraseña_Usu.Equals(u.contraseña_Usu)).FirstOrDefault();
                     if(v != null)
                     {
-                        Session["IDEmp"] = v.id_Emp.ToString();
-                        return RedirectToAction("Index");
+                        Session["idEmp"] = v.id_Emp;
+                        Session["tipoEmp"] = v.tipo_Usu;
+                        return RedirectToAction("Index","Index");
                     }
-
-                    return RedirectToAction("Login");
+                    ViewBag.Login = "No";
                 }
             }
-
             return View(u);
         }
     }

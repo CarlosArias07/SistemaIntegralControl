@@ -11,7 +11,19 @@ namespace SIC.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            return View();
+            int idEmp = Convert.ToInt32(Session["idEmp"]);
+            int tipoEmp = Convert.ToInt32(Session["tipoEmp"]);
+
+            ViewBag.idemp = idEmp;
+            ViewBag.tipoemp = tipoEmp;
+
+            using (DbModel db = new DbModel())
+            {
+                var v = db.empleados.Where(a => a.id_Emp.Equals(idEmp)).FirstOrDefault();
+                ViewBag.nombreemp = v.nombre_Emp;
+            }
+
+                return View();
         }
     }
 }

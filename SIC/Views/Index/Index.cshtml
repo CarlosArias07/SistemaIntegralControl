@@ -3,3 +3,37 @@
     ViewBag.Title = "Index";
 }
 
+@section EditTop{
+<li>
+    <ul class="nav navbar-top-links navbar-right pull-right">
+        <li>
+              <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+              </form>
+        </li>
+        <li>
+              <a class="profile-pic" href="#"> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
+        </li>
+    </ul>
+}
+
+@section EditSubtop {
+
+Nomina: @ViewBag.idemp
+Tipo: @ViewBag.tipoemp
+}
+
+@section EditMenu{
+
+@if (@ViewBag.tipoemp == 1)
+{
+    <ul class="nav" id="side-menu">
+        <li style="padding: 70px 0 0;">
+            <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+        </li>
+        <li>
+            <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
+        </li>
+    </ul>
+}
+}
