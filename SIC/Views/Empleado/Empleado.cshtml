@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Empleado";
+}
+
+
+@section EditTop{
+
+    <li>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+                <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                    <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+                </form>
+            </li>
+            <li>
+                <a class="profile-pic" href="#"> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
+            </li>
+        </ul>
+}
+
+@section EditSubtop {
+
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Empleados</h4>
+    </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+            <li>Usuario</li>
+            <li class="active">@ViewBag.tusu</li>
+        </ol>
+    </div>
+
+}
+
+@section EditMenu{
+
+    @if (@ViewBag.tipousu == 1)
+    {
+        <ul class="nav" id="side-menu">
+            <li style="padding: 70px 0 0;">
+                <a href="@Url.Action("Index", "Index")" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Empleado", "Empleado")" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>Servicios</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+            </li>
+        </ul>
+    }
+
+    @if (ViewBag.tipousu == 2)
+    {
+        <ul class="nav" id="side-menu">
+            <li style="padding: 70px 0 0;">
+                <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Inicio</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+            </li>
+        </ul>
+    }
+}
+
+@section EditContent{
+        
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3 class="box-title">Gestión de Empleados</h3>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Tipo</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>  
+}

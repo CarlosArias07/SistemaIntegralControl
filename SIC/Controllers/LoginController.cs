@@ -26,7 +26,7 @@ namespace SIC.Controllers
                     if(v != null)
                     {
                         Session["idEmp"] = v.id_Emp;
-                        Session["tipoEmp"] = v.tipo_Usu;
+                        Session["tipoUsu"] = v.tipo_Usu;
                         return RedirectToAction("Index","Index");
                     }
                     ViewBag.Login = "No";

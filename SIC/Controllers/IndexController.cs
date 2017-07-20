@@ -12,10 +12,19 @@ namespace SIC.Controllers
         public ActionResult Index()
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
-            int tipoEmp = Convert.ToInt32(Session["tipoEmp"]);
+            int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
 
             ViewBag.idemp = idEmp;
-            ViewBag.tipoemp = tipoEmp;
+            ViewBag.tipousu = tipoUsu;
+
+            if(tipoUsu == 1)
+            {
+                ViewBag.tusu = "Administrador";
+            }
+            else
+            {
+                ViewBag.tusu = "Empleado";
+            }
 
             using (DbModel db = new DbModel())
             {
