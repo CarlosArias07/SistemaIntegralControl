@@ -1,8 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "Empleado";
+    ViewBag.Title = "VerEmpleados";
 }
 
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            $('#tablaEmp').DataTable({
+                "ajax": {
+                    "url": "/Empleado/cargarEmpleados",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns" : [
+                        { "data": "id_Emp", "autoWidth": true },
+                        { "data": "nombre_Emp", "autoWidth": true },
+                        { "data": "apaterno_Emp", "autoWidth": true },
+                        { "data": "tipo_Emp", "autoWidth": true },
+                        { "data": "correo_Emp", "autoWidth": true }
+                    ]
+            });
+        });
+    </script>
+}
 
 @section EditTop{
 
@@ -42,7 +63,11 @@
                 <a href="@Url.Action("Index", "Index")" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
             </li>
             <li>
-                <a href="@Url.Action("Empleado", "Empleado")" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+                <a class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+                <ul>
+                    <li><a href="#"> Registrar</a></li>
+                    <li><a href="@Url.Action("VerEmpleados", "Empleado")"> Consultar</a></li>
+                </ul>
             </li>
             <li>
                 <a href="profile.html" class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
@@ -78,15 +103,15 @@
             <div class="white-box">
                 <h3 class="box-title">Gestión de Empleados</h3>
 
-                <div class="table-responsive">
+                <div class="table-responsive" id="tablaEmp">
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>Nómina</th>
                                 <th>Nombre</th>
                                 <th>Apellido Paterno</th>
                                 <th>Tipo</th>
-                                <th>Username</th>
-                                <th>Role</th>
+                                <th>Correo</th>
                             </tr>
                         </thead>
                     </table>

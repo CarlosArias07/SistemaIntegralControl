@@ -9,7 +9,7 @@ namespace SIC.Controllers
     public class EmpleadoController : Controller
     {
         // GET: Empleado
-        public ActionResult Empleado()
+        public ActionResult VerEmpleados()
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -33,6 +33,15 @@ namespace SIC.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult cargarEmpleados()
+        {
+            using (DbModel db = new DbModel())
+            {
+                var datos = db.empleados.OrderBy(a => a.id_Emp).ToList();
+                return Json(new { datos = datos }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
