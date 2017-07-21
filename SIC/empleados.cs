@@ -70,6 +70,8 @@ namespace SIC
 
         public int? estatus_Emp { get; set; }
 
+        public byte[] img_Emp { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cotizaciones_instalacion> cotizaciones_instalacion { get; set; }
 

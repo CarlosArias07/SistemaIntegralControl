@@ -1,0 +1,129 @@
+﻿@model SIC.empleados
+@{
+    ViewBag.Title = "RegistrarEmpleados";
+    var message = TempData["ConfirmationMessage"] ?? string.Empty;
+}
+
+@section Scripts{
+    
+    <link rel="stylesheet" href="~/Content/TLogin/css/style.css">
+    <!-- Alert JavaScript para mensaje de confirmación-->
+    <script type="text/javascript">
+        var message = '@message';
+        if(message)
+            alert(message);
+     </script>
+}
+
+@section EditTop{
+
+    <li>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+                <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                    <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+                </form>
+            </li>
+            <li>
+                <a class="profile-pic" href="#"> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
+            </li>
+        </ul>
+}
+
+@section EditSubtop {
+
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Empleados</h4>
+    </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+            <li>Usuario</li>
+            <li class="active">@ViewBag.tusu</li>
+        </ol>
+    </div>
+
+}
+
+@section EditMenu{
+
+    @if (@ViewBag.tipousu == 1)
+    {
+        <ul class="nav" id="side-menu">
+            <li style="padding: 70px 0 0;">
+                <a href="@Url.Action("Index", "Index")" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
+            </li>
+            <li>
+                <a class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+                <ul>
+                    <li><a href="@Url.Action("RegistrarEmpleados", "Empleado")"> Registrar</a></li>
+                    <li><a href="@Url.Action("VerEmpleados", "Empleado")"> Consultar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>Servicios</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+            </li>
+        </ul>
+    }
+
+    @if (ViewBag.tipousu == 2)
+    {
+        <ul class="nav" id="side-menu">
+            <li style="padding: 70px 0 0;">
+                <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Inicio</a>
+            </li>
+            <li>
+                <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+            </li>
+        </ul>
+    }
+}
+
+@section EditContent{
+
+    <div class="col-md-12">
+        <div class="white-box">
+            <h3 class="box-title">Registro de Empleados</h3>
+                @using (Html.BeginForm("CrearEmpleado", "Empleado", FormMethod.Post))
+                {
+                        <div class="form">
+                            <form>
+                                @Html.TextBoxFor(a => a.nombre_Emp, new { placeholder = "Nombre(s)" })
+                                @Html.TextBoxFor(a => a.apaterno_Emp, new { placeholder = "Apellido Paterno" })
+                                @Html.TextBoxFor(a => a.amaterno_Emp, new { placeholder = "Apellido Materno" })
+                                @Html.TextBoxFor(a => a.sexo_Emp, new { placeholder = "Sexo" })
+                                <br />
+                                @Html.TextBoxFor(a => a.tipo_Emp, new { placeholder = "Tipo" })
+                                @Html.TextBoxFor(a => a.edad_Emp, new { placeholder = "Edad" })
+                                @Html.TextBoxFor(a => a.telefono_Emp, new { placeholder = "Teléfono" })
+                                @Html.TextBoxFor(a => a.calle_Emp, new { placeholder = "Calle" })
+                                <br />
+                                @Html.TextBoxFor(a => a.colonia_Emp, new { placeholder = "Colonia" })
+                                @Html.TextBoxFor(a => a.numero_Emp, new { placeholder = "Numero" })
+                                @Html.TextBoxFor(a => a.correo_Emp, new { placeholder = "Email" })
+                                @Html.TextBoxFor(a => a.estadoc_Emp, new { placeholder = "Estado Civil" })
+                                <br />
+                                @Html.TextBoxFor(a => a.conquienvive_Emp, new { placeholder = "Con quien vive" })
+                                @Html.TextBoxFor(a => a.familia_Emp, new { placeholder = "Familia" })
+                                @Html.TextBoxFor(a => a.explaboral_Emp, new { placeholder = "Experiencia Laboral" })
+                                @Html.TextBoxFor(a => a.especialidad_Emp, new { placeholder = "Especialidad" })
+                                <br />
+                                @Html.TextBoxFor(a => a.img_Emp, null, new { type = "file" })
+                                <br />
+                                <button type="submit" id="sbutton">Aceptar</button>
+                            </form>
+                        </div>
+                }
+        </div>
+    </div>
+}
+
+

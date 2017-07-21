@@ -8,7 +8,7 @@
     public partial class DbModel : DbContext
     {
         public DbModel()
-            : base("name=DbModel")
+            : base("name=DbModel1")
         {
         }
 

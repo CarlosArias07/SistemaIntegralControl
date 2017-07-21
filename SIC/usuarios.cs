@@ -14,7 +14,6 @@ namespace SIC
 
         [Required]
         [StringLength(25)]
-        [DataType (System.ComponentModel.DataAnnotations.DataType.Password)]
         public string contraseña_Usu { get; set; }
 
         public int tipo_Usu { get; set; }
