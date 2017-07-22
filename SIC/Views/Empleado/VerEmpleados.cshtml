@@ -1,27 +1,62 @@
-﻿
+﻿@model SIC.empleados
 @{
     ViewBag.Title = "VerEmpleados";
 }
 
-@section Scripts{
+@section ScriptsDT{
     
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+    <!--<script src="~/Scripts/jquery-1.10.2.min.js"></script>-->
+    <!--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>-->
+    <!--<script src="~/Content/Template/plugins/bower_components/jquery/dist/jquery.js"></script>-->
+    <!--<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>-->
+    <!--<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>-->
     <script>
-        $(document).ready(function () {
+        /*$(document).ready(function () {
             $('#tablaEmp').DataTable({
                 "ajax": {
                     "url": "/Empleado/cargarEmpleados",
                     "type": "GET",
-                    "datatype": "json"
+                    "datatype": "json",
+                    "dataSrc": ""
                 },
                 "columns" : [
-                        { "data": "id_Emp", "autoWidth": true },
-                        { "data": "nombre_Emp", "autoWidth": true },
-                        { "data": "apaterno_Emp", "autoWidth": true },
-                        { "data": "tipo_Emp", "autoWidth": true },
-                        { "data": "correo_Emp", "autoWidth": true }
+                        { data: "id_Emp", "autoWidth": true },
+                        { data: "nombre_Emp", "autoWidth": true },
+                        { data: "apaterno_Emp", "autoWidth": true },
+                        { data: "tipo_Emp", "autoWidth": true },
+                        { data: "correo_Emp", "autoWidth": true }
                     ]
             });
+        });*/
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "/Empleado/cargarEmpleados",
+                mimeType: 'json',
+                success: function (datos) {
+                    $.each(data, function (i, data) {
+                        var body = "<tr>";
+                        body += "<td>" + dato + "</td>";
+                        body += "<td>" + data.address + "</td>";
+                        body += "<td>" + data.phone_no + "</td>";
+                        body += "<td>" + data.birthday + "</td>";
+                        body += "<td>" + data.color + "</td>";
+                        body += "<td>" + data.car + "</td>";
+                        body += "<td>" + data.hobbies + "</td>";
+                        body += "<td>" + data.relatives + "</td>";
+                        body += "</tr>";
+                        $("#summary-table tbody").append(body);
+                    });
+                    /*DataTables instantiation.*/
+                    $("#summary-table").DataTable();
+                },
+                error: function () {
+                    alert('Fail!');
+                }
+            });
         });
+
     </script>
 }
 
@@ -51,7 +86,6 @@
             <li class="active">@ViewBag.tusu</li>
         </ol>
     </div>
-
 }
 
 @section EditMenu{
@@ -98,13 +132,13 @@
 }
 
 @section EditContent{
-        
+
         <div class="col-md-12">
             <div class="white-box">
                 <h3 class="box-title">Gestión de Empleados</h3>
 
-                <div class="table-responsive" id="tablaEmp">
-                    <table class="table">
+                <div class="table-responsive">
+                    <table class="table" id="tablaEmp">
                         <thead>
                             <tr>
                                 <th>Nómina</th>
@@ -114,8 +148,11 @@
                                 <th>Correo</th>
                             </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>
-        </div>  
+        </div>
 }

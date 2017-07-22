@@ -44,33 +44,43 @@ namespace SIC.Controllers
                 {
                     using (DbModel db = new DbModel())
                     {
-                        e.estatus_Emp = 1;
-                        e.img_Emp = new byte[img.ContentLength];
-                        img.InputStream.Read(e.img_Emp, 0, img.ContentLength);
-                        db.empleados.Add(e);
-                        db.SaveChanges();
-
-                        if(e.tipo_Emp.Equals("V"))
+                        if (img != null)
                         {
-                            usuarios u = new usuarios();
-                            u.id_Emp = e.id_Emp;
-                            u.contraseña_Usu = "xxxx";
-                            u.tipo_Usu = 2;
-                            db.usuarios.Add(u);
+                            e.estatus_Emp = 1;
+                            e.img_Emp = new byte[img.ContentLength];
+                            img.InputStream.Read(e.img_Emp, 0, img.ContentLength);
+                            /*byte[] imagen = new byte[img.ContentLength];
+                            int readresult = img.InputStream.Read(imagen, 0, img.ContentLength);
+                            e.img_Emp = imagen;*/
+                            db.empleados.Add(e);
                             db.SaveChanges();
-                        }
 
-                        TempData["ConfirmationMessage"] = "Empleado Registrado";
-                        return RedirectToAction("RegistrarEmpleados");
+                            if (e.tipo_Emp.Equals("V"))
+                            {
+                                usuarios u = new usuarios();
+                                u.id_Emp = e.id_Emp;
+                                u.contraseña_Usu = "xxxx";
+                                u.tipo_Usu = 2;
+                                db.usuarios.Add(u);
+                                db.SaveChanges();
+                            }
+
+                            TempData["ConfirmationMessage"] = "Empleado Registrado";
+                            return RedirectToAction("RegistrarEmpleados");
+                        }else
+                        {
+                            TempData["ConfirmationMessage"] = "El archivo de imagen seleccionado no es válido";
+                           
+                        }
                     }
                 }
                 TempData["ConfirmationMessage"] = "No se pudo registrar al Empleado";
-                return View();
+                return RedirectToAction("RegistrarEmpleados");
             }
             catch
             {
                 TempData["ConfirmationMessage"] = "No se pudo registrar al Empleado";
-                return View();
+                return RedirectToAction("RegistrarEmpleados");
             }
                 
         }
@@ -105,7 +115,15 @@ namespace SIC.Controllers
         {
             using (DbModel db = new DbModel())
             {
-                var datos = db.empleados.OrderBy(a => a.id_Emp).ToList();
+                /*var datos = db.empleados.OrderBy(a => a.id_Emp).ToList();*/
+                var datos = db.empleados.Select(a => new
+                {
+                    id_Emp = a.id_Emp,
+                    nombre_Emp = a.nombre_Emp,
+                    apaterno_Emp = a.apaterno_Emp,
+                    tipo_Emp = a.tipo_Emp,
+                    correo_Emp = a.correo_Emp
+                }).ToList();
                 return Json(new { datos = datos }, JsonRequestBehavior.AllowGet);
             }
         }

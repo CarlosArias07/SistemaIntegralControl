@@ -156,8 +156,13 @@
     </div>
 
     <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="~/Content/Template/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery & DataTables -->
+    <!--<script src="~/Content/Template/plugins/bower_components/jquery/dist/jquery.min.js"></script>-->
+    <div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    @RenderSection("ScriptsDT", required: false)
+    </div>
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Content/Template/html/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
@@ -169,8 +174,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="~/Content/Template/html/js/custom.min.js"></script>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/scripts/datatables/jquery.dataTables.min.js"></script>
+    
 </body>
 </html>

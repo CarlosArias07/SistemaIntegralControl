@@ -92,7 +92,7 @@
     <div class="col-md-12">
         <div class="white-box">
             <h3 class="box-title">Registro de Empleados</h3>
-                @using (Html.BeginForm("CrearEmpleado", "Empleado", FormMethod.Post))
+                @using (Html.BeginForm("CrearEmpleado", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                         <div class="form">
                             <form>
@@ -116,7 +116,9 @@
                                 @Html.TextBoxFor(a => a.explaboral_Emp, new { placeholder = "Experiencia Laboral" })
                                 @Html.TextBoxFor(a => a.especialidad_Emp, new { placeholder = "Especialidad" })
                                 <br />
-                                @Html.TextBoxFor(a => a.img_Emp, null, new { type = "file" })
+                                @Html.LabelFor(a => a.img_Emp)
+                                <input type="file" id="img" name="img" />
+                                <!--Html.TextBoxFor(a => a.img_Emp, null, new {name="imagenEmp", type = "file", accept= ".png,.jpg,.jpeg" })-->
                                 <br />
                                 <button type="submit" id="sbutton">Aceptar</button>
                             </form>
