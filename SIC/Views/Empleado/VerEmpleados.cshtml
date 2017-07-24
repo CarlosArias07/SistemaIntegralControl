@@ -33,23 +33,20 @@
             $.ajax({
                 type: 'GET',
                 url: "/Empleado/cargarEmpleados",
-                mimeType: 'json',
+                datatype: 'json',
                 success: function (datos) {
-                    $.each(data, function (i, data) {
+                    $.each(datos, function (i, datos) {
                         var body = "<tr>";
-                        body += "<td>" + dato + "</td>";
-                        body += "<td>" + data.address + "</td>";
-                        body += "<td>" + data.phone_no + "</td>";
-                        body += "<td>" + data.birthday + "</td>";
-                        body += "<td>" + data.color + "</td>";
-                        body += "<td>" + data.car + "</td>";
-                        body += "<td>" + data.hobbies + "</td>";
-                        body += "<td>" + data.relatives + "</td>";
+                        body += "<td>" + datos.id_Emp + "</td>";
+                        body += "<td>" + datos.nombre_Emp + "</td>";
+                        body += "<td>" + datos.apaterno_Emp + "</td>";
+                        body += "<td>" + datos.tipo_Emp + "</td>";
+                        body += "<td>" + datos.correo_Emp + "</td>";
                         body += "</tr>";
-                        $("#summary-table tbody").append(body);
+                        $("#tablaEmp tbody").append(body);
                     });
                     /*DataTables instantiation.*/
-                    $("#summary-table").DataTable();
+                    $("#tablaEmp").DataTable();
                 },
                 error: function () {
                     alert('Fail!');
