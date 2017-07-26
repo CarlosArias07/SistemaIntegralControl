@@ -847,9 +847,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="articulos.cs" />
+    <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="cotizaciones_instalacion.cs" />
     <Compile Include="cotizaciones_instalacion_articulos.cs" />
     <Compile Include="DbModel.cs" />
@@ -881,6 +883,8 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Empleado\VerEmpleados.cshtml" />
     <Content Include="Views\Empleado\RegistrarEmpleados.cshtml" />
+    <Content Include="Views\Proveedor\RegistrarProveedores.cshtml" />
+    <Content Include="Views\Articulo\RegistrarArticulos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

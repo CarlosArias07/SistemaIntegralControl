@@ -1,18 +1,17 @@
-﻿@model SIC.empleados
+﻿@model SIC.proveedores
 @{
-    ViewBag.Title = "RegistrarEmpleados";
+    ViewBag.Title = "RegistrarProveedores";
     var message = TempData["ConfirmationMessage"] ?? string.Empty;
 }
 
 @section Scripts{
-    
-    <link rel="stylesheet" href="~/Content/TLogin/css/style.css">
+
     <!-- Alert JavaScript para mensaje de confirmación-->
     <script type="text/javascript">
         var message = '@message';
         if(message)
             alert(message);
-     </script>
+    </script>
 }
 
 @section EditTop{
@@ -33,7 +32,7 @@
 @section EditSubtop {
 
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Empleados</h4>
+        <h4 class="page-title">Proveedores</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
@@ -102,34 +101,15 @@
 
     <div class="col-md-12">
         <div class="white-box">
-            <h3 class="box-title">Registro de Empleados</h3>
-            @using (Html.BeginForm("CrearEmpleado", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            <h3 class="box-title">Registro de Proveedores</h3>
+            @using (Html.BeginForm("CrearProveedor", "Proveedor", FormMethod.Post))
             {
                 <div class="form">
                     <form>
-                        @Html.TextBoxFor(a => a.nombre_Emp, new { placeholder = "Nombre(s)", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.apaterno_Emp, new { placeholder = "Apellido Paterno", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.amaterno_Emp, new { placeholder = "Apellido Materno", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.sexo_Emp, new { placeholder = "Sexo" })
-                        <br />
-                        @Html.TextBoxFor(a => a.tipo_Emp, new { placeholder = "Tipo" })
-                        @Html.TextBoxFor(a => a.edad_Emp, new { placeholder = "Edad" })
-                        @Html.TextBoxFor(a => a.telefono_Emp, new { placeholder = "Teléfono" })
-                        @Html.TextBoxFor(a => a.calle_Emp, new { placeholder = "Calle", @style = "text-transform:uppercase" })
-                        <br />
-                        @Html.TextBoxFor(a => a.colonia_Emp, new { placeholder = "Colonia", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.numero_Emp, new { placeholder = "Numero" })
-                        @Html.TextBoxFor(a => a.correo_Emp, new { placeholder = "Email", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.estadoc_Emp, new { placeholder = "Estado Civil" })
-                        <br />
-                        @Html.TextBoxFor(a => a.conquienvive_Emp, new { placeholder = "Con quien vive", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.familia_Emp, new { placeholder = "Familia", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.explaboral_Emp, new { placeholder = "Experiencia Laboral", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.especialidad_Emp, new { placeholder = "Especialidad", @style = "text-transform:uppercase" })
-                        <br />
-                        @Html.LabelFor(a => a.img_Emp)
-                        <input type="file" id="img" name="img" />
-                        <!--Html.TextBoxFor(a => a.img_Emp, null, new {name="imagenEmp", type = "file", accept= ".png,.jpg,.jpeg" })-->
+                        @Html.TextBoxFor(a => a.nombre_Pro, new { placeholder = "Nombre", @style = "text-transform:uppercase" })
+                        @Html.TextBoxFor(a => a.giro_Pro, new { placeholder = "Giro", @style = "text-transform:uppercase" })
+                        @Html.TextBoxFor(a => a.direccion_Pro, new { placeholder = "Dirección", @style = "text-transform:uppercase" })
+                        @Html.TextBoxFor(a => a.pagweb_Pro, new { placeholder = "Página Web", @style = "text-transform:uppercase" })
                         <br />
                         <button type="submit" id="sbutton">Aceptar</button>
                     </form>
@@ -138,5 +118,4 @@
         </div>
     </div>
 }
-
 

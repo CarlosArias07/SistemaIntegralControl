@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace SIC.Controllers
 {
@@ -46,6 +48,18 @@ namespace SIC.Controllers
                     {
                         if (img != null)
                         {
+                            //--Pendiente combobox para tipo empleado--//
+                            e.nombre_Emp = e.nombre_Emp.ToUpper();
+                            e.apaterno_Emp = e.apaterno_Emp.ToUpper();
+                            e.amaterno_Emp = e.amaterno_Emp.ToUpper();
+                            e.calle_Emp = e.calle_Emp.ToUpper();
+                            e.colonia_Emp = e.colonia_Emp.ToUpper();
+                            e.correo_Emp = e.correo_Emp.ToUpper();
+                            e.estadoc_Emp = e.estadoc_Emp.ToUpper();
+                            e.conquienvive_Emp = e.conquienvive_Emp.ToUpper();
+                            e.familia_Emp = e.familia_Emp.ToUpper();
+                            e.explaboral_Emp = e.explaboral_Emp.ToUpper();
+                            e.especialidad_Emp = e.especialidad_Emp.ToUpper();
                             e.estatus_Emp = 1;
                             e.img_Emp = new byte[img.ContentLength];
                             img.InputStream.Read(e.img_Emp, 0, img.ContentLength);
@@ -74,7 +88,7 @@ namespace SIC.Controllers
                         }
                     }
                 }
-                TempData["ConfirmationMessage"] = "No se pudo registrar al Empleado";
+                TempData["ConfirmationMessage"] = "Es necesario proveer la información solicitada antes de continuar";
                 return RedirectToAction("RegistrarEmpleados");
             }
             catch
@@ -115,16 +129,27 @@ namespace SIC.Controllers
         {
             using (DbModel db = new DbModel())
             {
-                /*var datos = db.empleados.OrderBy(a => a.id_Emp).ToList();*/
-                var datos = db.empleados.Select(a => new
+                //db.Configuration.LazyLoadingEnabled = false;
+                //IQueryable<usuarios> q = db.usuarios.OrderBy(a => a.id_Emp);
+                //var datos = db.niveles.OrderBy(a => a.id_Niv).ToList();
+                var datos = db.niveles.Select(a => new
+                {
+                    a.id_Niv,
+                    a.descripcion_Niv,
+                    a.pcomision_Niv,
+                    a.venta_Niv,
+                }).ToList();
+                /*var datos = db.empleados.Select(a => new
                 {
                     id_Emp = a.id_Emp,
                     nombre_Emp = a.nombre_Emp,
                     apaterno_Emp = a.apaterno_Emp,
                     tipo_Emp = a.tipo_Emp,
                     correo_Emp = a.correo_Emp
-                }).ToList();
+                }).ToList();*/
                 return Json(new { datos = datos }, JsonRequestBehavior.AllowGet);
+                //JavaScriptSerializer js = new JavaScriptSerializer();
+                //return Json(Context), JsonRequestBehavior.AllowGet);
             }
         }
     }

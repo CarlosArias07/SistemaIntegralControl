@@ -28,9 +28,11 @@ namespace SIC
         [StringLength(50)]
         public string apaterno_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string amaterno_Emp { get; set; }
 
+        [Required]
         [StringLength(1)]
         public string sexo_Emp { get; set; }
 
@@ -38,38 +40,51 @@ namespace SIC
         [StringLength(1)]
         public string tipo_Emp { get; set; }
 
+        [Required]
         public int? edad_Emp { get; set; }
 
+        [Required]
         public int? telefono_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string calle_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string colonia_Emp { get; set; }
 
+        [Required]
         public int? numero_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string correo_Emp { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string estadoc_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string conquienvive_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string familia_Emp { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string explaboral_Emp { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string especialidad_Emp { get; set; }
 
+        [Required]
         public int? estatus_Emp { get; set; }
 
+        [Required]
         public byte[] img_Emp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

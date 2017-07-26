@@ -17,16 +17,19 @@ namespace SIC
         [Key]
         public int id_Pro { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "*")]
         [StringLength(50)]
         public string nombre_Pro { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [StringLength(50)]
         public string giro_Pro { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [StringLength(50)]
         public string direccion_Pro { get; set; }
 
+        [Required(ErrorMessage = "*")]
         [StringLength(50)]
         public string pagweb_Pro { get; set; }
 

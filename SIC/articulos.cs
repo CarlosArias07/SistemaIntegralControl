@@ -19,19 +19,20 @@ namespace SIC
 
         public int id_Pro { get; set; }
 
-        [Required]
         [StringLength(1)]
         public string tipo_Pro { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string nombre_Pro { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string descripcion_Pro { get; set; }
 
-        [Required]
         public byte[] imagen_Pro { get; set; }
 
+        [Required]
         public decimal? precio_Pro { get; set; }
 
         public int? estatus_Pro { get; set; }

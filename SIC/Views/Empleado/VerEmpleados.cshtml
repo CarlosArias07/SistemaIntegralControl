@@ -1,4 +1,4 @@
-﻿@model SIC.empleados
+﻿@model SIC.niveles
 @{
     ViewBag.Title = "VerEmpleados";
 }
@@ -12,47 +12,63 @@
     <!--<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>-->
     <!--<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>-->
     <script>
-        /*$(document).ready(function () {
+       /*$(document).ready(function () {
+            $.ajax({
+                url: "/Empleado/cargarEmpleados",
+                method: "GET",
+                dataType: "json",
+                success: function (datos) {
+                    $("#tablaEmp").dataTable({
+                        datos: datos,
+                        columns: [
+                        { "data": "id_Emp", "autoWidth": true },
+                        { "data": "contraseña_Usu", "autoWidth": true },
+                        { "data": "tipo_Usu", "autoWidth": true }
+                        ]
+                    });
+                }
+            });
+        });*/
+        $(document).ready(function () {
             $('#tablaEmp').DataTable({
                 "ajax": {
                     "url": "/Empleado/cargarEmpleados",
                     "type": "GET",
                     "datatype": "json",
-                    "dataSrc": ""
                 },
                 "columns" : [
-                        { data: "id_Emp", "autoWidth": true },
-                        { data: "nombre_Emp", "autoWidth": true },
-                        { data: "apaterno_Emp", "autoWidth": true },
-                        { data: "tipo_Emp", "autoWidth": true },
-                        { data: "correo_Emp", "autoWidth": true }
+                        { "data": "id_Niv", "autoWidth": true },
+                        { "data": "descripcion_Niv", "autoWidth": true },
+                        { "data": "pcomision_Niv", "autoWidth": true },
+                        { "data": "venta_Niv", "autoWidth": true }
                     ]
             });
-        });*/
-        $(document).ready(function () {
+        });
+        /*$(document).ready(function () {
             $.ajax({
                 type: 'GET',
                 url: "/Empleado/cargarEmpleados",
                 datatype: 'json',
-                success: function (datos) {
-                    $.each(datos, function (i, datos) {
+                dataSrc: "",
+                success: function (data) {
+                    $.each(data, function (i, data) {
                         var body = "<tr>";
-                        body += "<td>" + datos.id_Emp + "</td>";
-                        body += "<td>" + datos.nombre_Emp + "</td>";
-                        body += "<td>" + datos.apaterno_Emp + "</td>";
-                        body += "<td>" + datos.tipo_Emp + "</td>";
-                        body += "<td>" + datos.correo_Emp + "</td>";
+                        body += "<td>" + data.id_Emp + "</td>";
+                        body += "<td>" + data.nombre_Emp + "</td>";
+                        body += "<td>" + data.apaterno_Emp + "</td>";
+                        body += "<td>" + data.tipo_Emp + "</td>";
+                        body += "<td>" + data.correo_Emp + "</td>";
                         body += "</tr>";
                         $("#tablaEmp tbody").append(body);
                     });
-                    /*DataTables instantiation.*/
+                    /*DataTables instantiation.
                     $("#tablaEmp").DataTable();
                 },
                 error: function () {
                     alert('Fail!');
                 }
             });
-        });
+        });*/
 
     </script>
 }
@@ -101,7 +117,18 @@
                 </ul>
             </li>
             <li>
-                <a href="profile.html" class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
+                <a class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
+                <ul>
+                    <li><a href="@Url.Action("RegistrarProveedores", "Proveedor")"> Registrar</a></li>
+                    <li><a href="#"> Consultar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Artículos</a>
+                <ul>
+                    <li><a href="@Url.Action("RegistrarArticulos", "Articulo")"> Registrar</a></li>
+                    <li><a href="#"> Consultar</a></li>
+                </ul>
             </li>
             <li>
                 <a href="profile.html" class="waves-effect"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>Servicios</a>
@@ -138,16 +165,12 @@
                     <table class="table" id="tablaEmp">
                         <thead>
                             <tr>
-                                <th>Nómina</th>
-                                <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Tipo</th>
-                                <th>Correo</th>
+                                <th>id_Niv</th>
+                                <th>descripcion_Niv</th>
+                                <th>pcomision_Niv</th>
+                                <th>venta_Niv</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                        </tbody>
                     </table>
                 </div>
             </div>
