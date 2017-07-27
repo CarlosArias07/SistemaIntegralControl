@@ -1,6 +1,29 @@
-﻿@model SIC.niveles
+﻿@model List<SIC.empleados>
 @{
     ViewBag.Title = "VerEmpleados";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            try {
+                var dir = $('#dir').val();
+                var col = $('#col').val();
+                var header = $("th a[href*=" + col + "]");
+                if (dir == "Ascending") {
+                    header.text(header.text() + " ▲")
+                }
+                if (dir == "Descending") {
+                    header.text(header.text() + " ▼")
+                }
+            } catch (e) {
+
+            }
+        })
+    </script>
 }
 
 @section ScriptsDT{
@@ -29,7 +52,7 @@
                 }
             });
         });*/
-        $(document).ready(function () {
+        /*$(document).ready(function () {
             $('#tablaEmp').DataTable({
                 "ajax": {
                     "url": "/Empleado/cargarEmpleados",
@@ -120,7 +143,7 @@
                 <a class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
                 <ul>
                     <li><a href="@Url.Action("RegistrarProveedores", "Proveedor")"> Registrar</a></li>
-                    <li><a href="#"> Consultar</a></li>
+                    <li><a href="@Url.Action("VerProveedores", "Proveedor")"> Consultar</a></li>
                 </ul>
             </li>
             <li>
@@ -161,17 +184,48 @@
             <div class="white-box">
                 <h3 class="box-title">Gestión de Empleados</h3>
 
-                <div class="table-responsive">
-                    <table class="table" id="tablaEmp">
-                        <thead>
-                            <tr>
-                                <th>id_Niv</th>
-                                <th>descripcion_Niv</th>
-                                <th>pcomision_Niv</th>
-                                <th>venta_Niv</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div>
+                            <a href="#" class="navbar-brand">Buscar</a>
+                            <span class="pull-right"><button class="btn btn-info">Reestablecer</button></span>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            @using (Html.BeginForm("VerEmpleados", "Empleado", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                            {
+                                <div class="form-group">
+                                    <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
+                                </div>
+                                <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                            }
+                        </div>
+                    </div>
+                </nav>
+                <div>
+                    @grid.Table(
+                        tableStyle: "table table-responsive table-bordered",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        rowStyle: "webgrid-row-style",
+                        columns: grid.Columns(
+                            grid.Column(columnName: "nombre_Emp", header: "Nombre"),
+                            grid.Column(columnName: "apaterno_Emp", header: "Paterno"),
+                            grid.Column(columnName: "amaterno_Emp", header: "Materno"),
+                            grid.Column(columnName: "tipo_Emp", header: "Tipo"),
+                            grid.Column(columnName: "telefono_Emp", header: "Teléfono"),
+                            grid.Column(columnName: "correo_Emp", header: "Email"),
+                            grid.Column(columnName: "img_Emp", header: "Imagen"),
+                            grid.Column(header: "⇨", format: (item) => Html.ActionLink("Ver", "Ver", new { }))
+        )
+    )
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @grid.Pager(mode: WebGridPagerModes.All)
+                        </div>
+                    </div>
+                    @Html.Hidden("dir", grid.SortDirection)
+                    @Html.Hidden("col", grid.SortColumn)
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Linq.Dynamic;
 
 namespace SIC.Controllers
 {
@@ -35,7 +36,6 @@ namespace SIC.Controllers
             }
             return View();
         }
-
 
         [HttpPost]
         public ActionResult CrearEmpleado(empleados e, HttpPostedFileBase img)
@@ -99,7 +99,7 @@ namespace SIC.Controllers
                 
         }
 
-        public ActionResult VerEmpleados()
+        public ActionResult VerEmpleados(int page = 1, string sort = "nombre_Emp", string sortdir = "asc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -122,10 +122,42 @@ namespace SIC.Controllers
                 ViewBag.nombreemp = v.nombre_Emp;
             }
 
-            return View();
+            //WebGridEmpleados
+            int pageSize = 10;
+            int totalRecord = 0;
+            if (page < 1) page = 1;
+            int skip = (page * pageSize) - pageSize;
+            var data = cargarEmpleados(search, sort, sortdir, skip, pageSize, out totalRecord);
+            ViewBag.TotalRows = totalRecord;
+            ViewBag.Search = search;
+
+            return View(data);
         }
 
-        public ActionResult cargarEmpleados()
+        public List<empleados> cargarEmpleados(string search, string sort, string sortdir, int skip, int pageSize, out int totalRecord)
+        {
+            using (DbModel db = new DbModel())
+            {
+                var v = (from a in db.empleados
+                         where
+                            a.nombre_Emp.Contains(search) ||
+                            a.apaterno_Emp.Contains(search) ||
+                            a.amaterno_Emp.Contains(search) ||
+                            a.correo_Emp.Contains(search) ||
+                            a.tipo_Emp.Contains(search)
+                         select a
+                         );
+                totalRecord = v.Count();
+                v = v.OrderBy(sort + " " + sortdir);
+                if(pageSize > 0)
+                {
+                    v = v.Skip(skip).Take(pageSize);
+                }
+                return v.ToList();
+            }
+        }
+
+        /*public ActionResult cargarEmpleados()
         {
             using (DbModel db = new DbModel())
             {
@@ -146,11 +178,11 @@ namespace SIC.Controllers
                     apaterno_Emp = a.apaterno_Emp,
                     tipo_Emp = a.tipo_Emp,
                     correo_Emp = a.correo_Emp
-                }).ToList();*/
+                }).ToList();
                 return Json(new { datos = datos }, JsonRequestBehavior.AllowGet);
                 //JavaScriptSerializer js = new JavaScriptSerializer();
                 //return Json(Context), JsonRequestBehavior.AllowGet);
             }
-        }
+        }*/
     }
 }

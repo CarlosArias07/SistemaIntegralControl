@@ -1,18 +1,29 @@
-﻿@model SIC.empleados
+﻿@model List<SIC.proveedores>
 @{
-    ViewBag.Title = "RegistrarEmpleados";
-    var message = TempData["ConfirmationMessage"] ?? string.Empty;
+    ViewBag.Title = "VerProveedores";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
 
 @section Scripts{
-    
-    <link rel="stylesheet" href="~/Content/TLogin/css/style.css">
-    <!-- Alert JavaScript para mensaje de confirmación-->
-    <script type="text/javascript">
-        var message = '@message';
-        if(message)
-            alert(message);
-     </script>
+
+    <script>
+        $(function () {
+            try {
+                var dir = $('#dir').val();
+                var col = $('#col').val();
+                var header = $("th a[href*=" + col + "]");
+                if (dir == "Ascending") {
+                    header.text(header.text() + " ▲")
+                }
+                if (dir == "Descending") {
+                    header.text(header.text() + " ▼")
+                }
+            } catch (e) {
+
+            }
+        })
+    </script>
 }
 
 @section EditTop{
@@ -33,7 +44,7 @@
 @section EditSubtop {
 
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Empleados</h4>
+        <h4 class="page-title">Proveedores</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
@@ -41,7 +52,6 @@
             <li class="active">@ViewBag.tusu</li>
         </ol>
     </div>
-
 }
 
 @section EditMenu{
@@ -102,41 +112,48 @@
 
     <div class="col-md-12">
         <div class="white-box">
-            <h3 class="box-title">Registro de Empleados</h3>
-            @using (Html.BeginForm("CrearEmpleado", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="form">
-                    <form>
-                        @Html.TextBoxFor(a => a.nombre_Emp, new { placeholder = "Nombre(s)", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.apaterno_Emp, new { placeholder = "Apellido Paterno", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.amaterno_Emp, new { placeholder = "Apellido Materno", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.sexo_Emp, new { placeholder = "Sexo" })
-                        <br />
-                        @Html.TextBoxFor(a => a.tipo_Emp, new { placeholder = "Tipo" })
-                        @Html.TextBoxFor(a => a.edad_Emp, new { placeholder = "Edad" })
-                        @Html.TextBoxFor(a => a.telefono_Emp, new { placeholder = "Teléfono" })
-                        @Html.TextBoxFor(a => a.calle_Emp, new { placeholder = "Calle", @style = "text-transform:uppercase" })
-                        <br />
-                        @Html.TextBoxFor(a => a.colonia_Emp, new { placeholder = "Colonia", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.numero_Emp, new { placeholder = "Numero" })
-                        @Html.TextBoxFor(a => a.correo_Emp, new { placeholder = "Email", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.estadoc_Emp, new { placeholder = "Estado Civil" })
-                        <br />
-                        @Html.TextBoxFor(a => a.conquienvive_Emp, new { placeholder = "Con quien vive", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.familia_Emp, new { placeholder = "Familia", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.explaboral_Emp, new { placeholder = "Experiencia Laboral", @style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.especialidad_Emp, new { placeholder = "Especialidad", @style = "text-transform:uppercase" })
-                        <br />
-                        @Html.LabelFor(a => a.img_Emp)
-                        <input type="file" id="img" name="img" />
-                        <!--Html.TextBoxFor(a => a.img_Emp, null, new {name="imagenEmp", type = "file", accept= ".png,.jpg,.jpeg" })-->
-                        <br />
-                        <button type="submit" id="sbutton">Aceptar</button>
-                    </form>
+            <h3 class="box-title">Gestión de Proveedores</h3>
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div>
+                        <a href="#" class="navbar-brand">Buscar</a>
+                        <span class="pull-right"><button class="btn btn-info">Reestablecer</button></span>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        @using (Html.BeginForm("VerProveedores", "Proveedor", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
+                            </div>
+                                <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                        }
+                    </div>
                 </div>
-            }
+            </nav>
+            <div>
+                @grid.Table(
+                        tableStyle: "table table-responsive table-bordered",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        rowStyle: "webgrid-row-style",
+                        columns: grid.Columns(
+                            grid.Column(columnName: "nombre_Pro", header: "Nombre"),
+                            grid.Column(columnName: "giro_Pro", header: "Giro"),
+                            grid.Column(columnName: "direccion_Pro", header: "Dirección"),
+                            grid.Column(columnName: "pagweb_Pro", header: "Sitio Web"),
+                            grid.Column(header: "⇨", format: (item) => Html.ActionLink("Ver", "Ver", new { }))
+        )
+    )
+                <div class="row">
+                    <div class="col-sm-6">
+                        @grid.Pager(mode: WebGridPagerModes.All)
+                    </div>
+                </div>
+                @Html.Hidden("dir", grid.SortDirection)
+                @Html.Hidden("col", grid.SortColumn)
+            </div>
         </div>
     </div>
 }
-
-
