@@ -857,10 +857,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="articulos.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\CotizacionController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="cotizaciones_info.cs" />
     <Compile Include="cotizaciones_instalacion.cs" />
     <Compile Include="cotizaciones_instalacion_articulos.cs" />
     <Compile Include="DbModel.cs" />
@@ -895,6 +897,8 @@
     <Content Include="Views\Proveedor\RegistrarProveedores.cshtml" />
     <Content Include="Views\Articulo\RegistrarArticulos.cshtml" />
     <Content Include="Views\Proveedor\VerProveedores.cshtml" />
+    <Content Include="Views\Articulo\VerArticulos.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesAsignacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

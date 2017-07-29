@@ -19,6 +19,7 @@ namespace SIC
 
         public int id_Pro { get; set; }
 
+        [Required]
         [StringLength(1)]
         public string tipo_Pro { get; set; }
 
@@ -30,6 +31,7 @@ namespace SIC
         [StringLength(100)]
         public string descripcion_Pro { get; set; }
 
+        [Required]
         public byte[] imagen_Pro { get; set; }
 
         [Required]

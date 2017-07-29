@@ -1,6 +1,6 @@
-﻿@model List<SIC.proveedores>
+﻿@model List<SIC.articulos>
 @{
-    ViewBag.Title = "VerProveedores";
+    ViewBag.Title = "VerArticulos";
     var grid = new WebGrid(canPage: true, rowsPerPage: 2);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
@@ -44,7 +44,7 @@
 @section EditSubtop {
 
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Proveedores</h4>
+        <h4 class="page-title">Artículos</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
@@ -117,7 +117,7 @@
 
     <div class="col-md-12">
         <div class="white-box">
-            <h3 class="box-title">Gestión de Proveedores</h3>
+            <h3 class="box-title">Gestión de Artículos</h3>
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -126,12 +126,12 @@
                         <span class="pull-right"><button class="btn btn-info">Reestablecer</button></span>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @using (Html.BeginForm("VerProveedores", "Proveedor", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        @using (Html.BeginForm("VerArticulos", "Articulo", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
                             <div class="form-group">
                                 <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
                             </div>
-                                <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                            <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
                         }
                     </div>
                 </div>
@@ -143,11 +143,12 @@
                         footerStyle: "webgrid-footer",
                         alternatingRowStyle: "webgrid-alternating-row",
                         rowStyle: "webgrid-row-style",
-                        columns: grid.Columns(
-                            grid.Column(columnName: "nombre_Pro", header: "Nombre"),
-                            grid.Column(columnName: "giro_Pro", header: "Giro"),
-                            grid.Column(columnName: "direccion_Pro", header: "Dirección"),
-                            grid.Column(columnName: "pagweb_Pro", header: "Sitio Web"),
+                        columns: grid.Columns( 
+                            grid.Column(header: "IMAGEN", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.ArticuloController.ConvertByteArrayToBase64(@item.id_Art)" alt="" height="70" width="85">),
+                            grid.Column(columnName: "tipo_Pro", header: "TIPO"),
+                            grid.Column(columnName: "nombre_Pro", header: "NOMBRE"),
+                            grid.Column(columnName: "descripcion_Pro", header: "DESCRIPCION"),
+                            grid.Column(columnName: "precio_Pro", header: "PRECIO"),
                             grid.Column(header: "⇨", format: (item) => Html.ActionLink("Ver", "Ver", new { }))
         )
     )

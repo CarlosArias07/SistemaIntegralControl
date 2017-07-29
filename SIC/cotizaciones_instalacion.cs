@@ -48,6 +48,9 @@ namespace SIC
 
         public int? estatus_CotIns { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? fecha_CotIns { get; set; }
+
         public virtual empleados empleados { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

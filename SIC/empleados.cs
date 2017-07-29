@@ -81,10 +81,8 @@ namespace SIC
         [StringLength(50)]
         public string especialidad_Emp { get; set; }
 
-        [Required]
         public int? estatus_Emp { get; set; }
 
-        [Required]
         public byte[] img_Emp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

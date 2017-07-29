@@ -8,7 +8,7 @@
     public partial class DbModel : DbContext
     {
         public DbModel()
-            : base("name=DbModel1")
+            : base("name=DbModel5")
         {
         }
 
@@ -22,6 +22,7 @@
         public virtual DbSet<proveedores> proveedores { get; set; }
         public virtual DbSet<servicios_instalacion> servicios_instalacion { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
+        public virtual DbSet<cotizaciones_info> cotizaciones_info { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -172,6 +173,10 @@
                 .Property(e => e.totalventa_EmpVenIns)
                 .HasPrecision(8, 2);
 
+            modelBuilder.Entity<empleados_venta_instalacion>()
+                .Property(e => e.comision_EmpVenIns)
+                .HasPrecision(8, 2);
+
             modelBuilder.Entity<niveles>()
                 .Property(e => e.descripcion_Niv)
                 .IsUnicode(false);
@@ -221,6 +226,58 @@
 
             modelBuilder.Entity<usuarios>()
                 .Property(e => e.contraseña_Usu)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.nombre_Emp)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.apaterno_Emp)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.nombre_Pro)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.tipo_Pro)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.nombre_Art)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.mtscable_CotIns)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.totalcable_CotIns)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.observaciones_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.total_CotIns)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.nombrecli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.domiciliocli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.correocli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<cotizaciones_info>()
+                .Property(e => e.complejidad_CotIns)
                 .IsUnicode(false);
         }
     }

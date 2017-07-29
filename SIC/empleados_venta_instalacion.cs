@@ -24,6 +24,8 @@ namespace SIC
 
         public int? considerada_EmpVenIns { get; set; }
 
+        public decimal? comision_EmpVenIns { get; set; }
+
         public virtual cotizaciones_instalacion cotizaciones_instalacion { get; set; }
 
         public virtual empleados empleados { get; set; }
