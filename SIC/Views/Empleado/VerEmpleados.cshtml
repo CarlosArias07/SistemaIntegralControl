@@ -34,66 +34,6 @@
     <!--<script src="~/Content/Template/plugins/bower_components/jquery/dist/jquery.js"></script>-->
     <!--<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>-->
     <!--<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>-->
-    <script>
-       /*$(document).ready(function () {
-            $.ajax({
-                url: "/Empleado/cargarEmpleados",
-                method: "GET",
-                dataType: "json",
-                success: function (datos) {
-                    $("#tablaEmp").dataTable({
-                        datos: datos,
-                        columns: [
-                        { "data": "id_Emp", "autoWidth": true },
-                        { "data": "contraseña_Usu", "autoWidth": true },
-                        { "data": "tipo_Usu", "autoWidth": true }
-                        ]
-                    });
-                }
-            });
-        });*/
-        /*$(document).ready(function () {
-            $('#tablaEmp').DataTable({
-                "ajax": {
-                    "url": "/Empleado/cargarEmpleados",
-                    "type": "GET",
-                    "datatype": "json",
-                },
-                "columns" : [
-                        { "data": "id_Niv", "autoWidth": true },
-                        { "data": "descripcion_Niv", "autoWidth": true },
-                        { "data": "pcomision_Niv", "autoWidth": true },
-                        { "data": "venta_Niv", "autoWidth": true }
-                    ]
-            });
-        });
-        /*$(document).ready(function () {
-            $.ajax({
-                type: 'GET',
-                url: "/Empleado/cargarEmpleados",
-                datatype: 'json',
-                dataSrc: "",
-                success: function (data) {
-                    $.each(data, function (i, data) {
-                        var body = "<tr>";
-                        body += "<td>" + data.id_Emp + "</td>";
-                        body += "<td>" + data.nombre_Emp + "</td>";
-                        body += "<td>" + data.apaterno_Emp + "</td>";
-                        body += "<td>" + data.tipo_Emp + "</td>";
-                        body += "<td>" + data.correo_Emp + "</td>";
-                        body += "</tr>";
-                        $("#tablaEmp tbody").append(body);
-                    });
-                    /*DataTables instantiation.
-                    $("#tablaEmp").DataTable();
-                },
-                error: function () {
-                    alert('Fail!');
-                }
-            });
-        });*/
-
-    </script>
 }
 
 @section EditTop{
@@ -159,7 +99,7 @@
             <li>
                 <a class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
                 <ul>
-                    <li><a href="@Url.Action("VerCotizacionesPendientesAsignacion", "Cotizacion")"> Pendientes de Asignación</a></li>
+                    <li><a href="@Url.Action("VerCotizacionesAsignacion", "Cotizacion")"> Pendientes de Asignación</a></li>
                     <li><a href="#"> Aceptadas</a></li>
                     <li><a href="#"> Canceladas</a></li>
                 </ul>

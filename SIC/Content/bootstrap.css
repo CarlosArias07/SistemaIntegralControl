@@ -1078,6 +1078,10 @@ pre code {
   }
 }
 
+.sixtypx{width: 90px;}
+
+.sixtypx2{width: 15%;}
+
 @media (min-width: 992px) {
   .container {
     max-width: 970px;
@@ -5613,9 +5617,9 @@ body.modal-open,
 .modal {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 10px;
   bottom: 0;
-  left: 0;
+  left: auto;
   z-index: 1040;
   display: none;
   overflow: auto;
@@ -5639,11 +5643,14 @@ body.modal-open,
 }
 
 .modal-dialog {
+  position: absolute;
   z-index: 1050;
   width: auto;
   padding: 10px;
-  margin-right: auto;
-  margin-left: auto;
+  left: 50%
+  top: 50%;
+  margin-top: -250px;
+  margin-left: -312px;
 }
 
 .modal-content {
@@ -5740,11 +5747,14 @@ body.modal-open,
 
 @media screen and (min-width: 768px) {
   .modal-dialog {
-    right: auto;
-    left: 50%;
-    width: 600px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+   position: absolute;
+   left: 50%;
+   /* now you must set a margin left under zero - value is a half width your window */
+   margin-left: -312px;
+   /* this same situation is with height - example */
+   height: 500px;
+   top: 50%;
+   margin-top: -250px;
   }
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -6813,4 +6823,5 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+
 }

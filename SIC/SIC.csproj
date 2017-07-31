@@ -862,6 +862,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="cotizacionesInfo_empleados.cs" />
     <Compile Include="cotizaciones_info.cs" />
     <Compile Include="cotizaciones_instalacion.cs" />
     <Compile Include="cotizaciones_instalacion_articulos.cs" />
@@ -899,6 +900,8 @@
     <Content Include="Views\Proveedor\VerProveedores.cshtml" />
     <Content Include="Views\Articulo\VerArticulos.cshtml" />
     <Content Include="Views\Cotizacion\VerCotizacionesAsignacion.cshtml" />
+    <Content Include="Views\Cotizacion\AsignarCotizacion.cshtml" />
+    <Content Include="Views\Cotizacion\AsignarCotizaciones.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

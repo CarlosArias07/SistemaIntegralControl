@@ -1,0 +1,179 @@
+﻿@model cotizacionesInfo_empleados
+@{ 
+    var message = TempData["ConfirmationMessage"] ?? string.Empty;
+    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+    grid.Bind(source: Model.Model2, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+        var message = '@message';
+        if(message)
+            alert(message);
+    </script>
+}
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 50%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #E4E7EA;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #E4E7EA;
+            padding: 1px 1px 1px;
+        }
+
+    .webgrid-header {
+        background-color: white;
+        color: #FFFFFF;
+        padding-bottom: 1px;
+        padding-top: 1px;
+        text-align: center;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 1px 1px 1px;
+    }
+
+    .webgrid-alternating-row {
+        color: white;
+        background-color: limegreen;
+        padding: 1px 1px 1px;
+    }
+</style>
+
+
+
+@section ScriptsDT{
+    
+    <script>
+       /* $(document).on("click", ".name", function () {
+            var id_Emp = $(this).data('id');
+            var url = $(this).attr('href') + '?id_Emp=' + id_Emp; // build new url
+            location.href = url; // redirect
+            return false; // cancel default redirect
+        });
+
+        /*$('#myLink').click(function () {
+            var idc = $('#idcot').val(); // get the textbox value
+            var url = $(this).attr('href') + '?idc=' + idc; // build new url
+            location.href = url; // redirect
+            return false; // cancel default redirect
+        });*/
+        /*$(document).on("click", ".name", function () {
+            var id_Emp = $(this).data('id');
+            var url = $('#caModal').data('url');
+            $.get(url, { id: id_Emp }, function (data) {
+                location.href = url; // redirect
+                return false;
+            });
+        });*/
+    </script>
+}
+<body>
+    <div id='caModal' data-url='@Url.Action("Asignar")'>
+        <div id='caContainer'>
+        </div>
+    </div>
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title active"><b>ASIGNAR COTIZACIÓN</b></h4> &nbsp;&nbsp;&nbsp;<button type="button">H</button>
+            </div>
+            <div class="modal-body">
+                <p>Detalles de la Cotización</p>
+                @{
+
+                    foreach (var item in Model.Model1)
+                    {
+                            <label>Código: </label><input type="text" id="idcot" value="@item.id_CotIns" readonly />
+                            <label>Fecha: </label><input type="text" value="@item.fecha_CotIns" readonly/>
+                            <br />
+                            <br />
+                            <p class="active">Vendedor</p>
+                            <label>Nombre: </label><input type="text" value="@item.nombre_Emp" readonly/>
+                            <br />
+                            <label>A Paterno: </label><input type="text" value="@item.apaterno_Emp" readonly />
+                            <br />
+                            <br />
+                            <p>Artículo</p>
+                            <img src="data:image/jpeg;base64,@SIC.Controllers.ArticuloController.ConvertByteArrayToBase64(@item.id_Art)" alt="" height="100" width="100" class="img-thumbnail">
+                            <br />
+                            <br />
+                            <label>Tipo:</label><input type="text" value="@item.tipo_Pro"  readonly />
+                            <br />
+                            <label>Nombre:</label><input type="text" value="@item.nombre_Pro"  readonly />
+                            <br />
+                            <br />
+                            <p class="active">Otros</p>
+                            <label>Metros cable:</label><input type="text" value="@item.mtscable_CotIns" readonly />
+                            <br />
+                            <label>Total cable:</label><input type="text" value="@item.totalcable_CotIns" readonly />
+                            <br />
+                            <label>Observaciones:</label><input type="text" value="@item.observaciones_CotIns" readonly />
+                            <br />
+                            <label>Total $:</label><input type="text" value="@item.total_CotIns"  readonly />
+                            <br />
+                            <label>Complejidad :</label><input type="text" value="@item.complejidad_CotIns"  readonly />
+                            <br />
+                            <br />
+                            <p>Cliente</p>
+                            <label>Nombre:</label><input type="text" value="@item.nombrecli_CotIns"  readonly />
+                            <br />
+                            <label>Teléfono:</label><input type="text" value="@item.telefonocli_CotIns"  readonly />
+                            <br />
+                            <label>Domicilio:</label><input type="text" value="@item.domiciliocli_CotIns" readonly />
+                            <br />
+                            <label>Correo:</label><input type="text" value="@item.correocli_CotIns" readonly />
+                            <br />
+                    }
+                }
+                <br />
+                <br />
+                <p>Técnicos para Asignación</p>
+                <div>
+                    @grid.Table(
+                  
+                        tableStyle: "webgrid-table",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        rowStyle: "webgrid-row-style",
+                        columns: grid.Columns(
+                            grid.Column(header: "IMAGEN", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.CotizacionController.ConvertByteArrayToBase64(@item.id_Emp)" alt="" height="70" width="85" class="img-circle">),
+                            grid.Column(columnName: "nombre_Emp", header: "NOMBRE"),
+                            grid.Column(columnName: "apaterno_Emp", header: "A PATERNO"),
+                            grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" onclick="location.href='@Url.Action("Asignar", "Cotizacion", new {ide = item.id_Emp, idc = ViewBag.idCot })'">Asignar</button></text>)
+
+        )
+    )
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @grid.Pager(mode: WebGridPagerModes.All)
+                        </div>
+                    </div>
+                    @Html.Hidden("dir", grid.SortDirection)
+                    @Html.Hidden("col", grid.SortColumn)
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <p class="dt-body-left">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</body>

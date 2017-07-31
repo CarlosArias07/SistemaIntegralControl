@@ -1,11 +1,21 @@
 ﻿@model List<SIC.cotizaciones_info>
 @{
+    var message = TempData["ConfirmationMessage"] ?? string.Empty;
     ViewBag.Title = "VerCotizacionesAsignacion";
     var grid = new WebGrid(canPage: true, rowsPerPage: 2);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
 
 @section Scripts{
+
+    <script type="text/javascript">
+        var message = '@message';
+        if(message)
+            alert(message);
+    </script>
+}
+
+@section ScriptsDT{
 
     <script>
         $(function () {
@@ -23,6 +33,27 @@
 
             }
         })
+    </script>
+    <script>
+        /*$(document).ready(function () {
+            $('#showModal').click(function () {
+                var url = $('#caModal').data('url');
+
+                $.get(url, function (data) {
+                    $('#caContainer').html(data);
+
+                    $('#caModal').modal('show');
+                });
+            });
+        });*/
+        $(document).on("click", ".name", function () {
+                var id_CotIns = $(this).data('id');
+                var url = $('#caModal').data('url');
+                $.get(url, { id: id_CotIns }, function (data) {
+                    $('#caContainer').html(data);
+                    $('#caModal').modal('show');
+                });
+            });
     </script>
 }
 
@@ -117,13 +148,36 @@
 
     <div class="col-md-12">
         <div class="white-box">
+            <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("AsignarCotizaciones")'>
+                <div id='caContainer'>
+                </div>
+            </div>
+             <!--Modal 
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                     Modal content
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">COTIZACIÓN</h4><span class="pull-right">H</span>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" value="" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>-->
             <h3 class="box-title">Cotizaciones Pendientes de Asignación</h3>
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div>
                         <a href="#" class="navbar-brand">Buscar</a>
-                        <span class="pull-right"><button class="btn btn-info">Reestablecer</button></span>
                     </div>
                     <div class="collapse navbar-collapse">
                         @using (Html.BeginForm("VerCotizacionesAsignacion", "Cotizacion", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
@@ -144,13 +198,17 @@
                         alternatingRowStyle: "webgrid-alternating-row",
                         rowStyle: "webgrid-row-style",
                         columns: grid.Columns(
-                            grid.Column(header: "IMAGEN", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.CotizacionController.ConvertByteArrayToBase64(@item.id_Emp)" alt="" height="80" width="70" class="img-circle">),
+                            grid.Column(header: "VENDEDOR", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.CotizacionController.ConvertByteArrayToBase64(@item.id_Emp)" alt="" height="80" width="70" class="img-circle">),
                             grid.Column(columnName: "nombre_Emp", header: "NOMBRE"),
                             grid.Column(columnName: "apaterno_Emp", header: "APELLIDO"),
                             grid.Column(columnName: "nombre_Art", header: "ARTICULO"),
                             grid.Column(columnName: "nombrecli_CotIns", header: "CLIENTE"),
                             grid.Column(columnName: "fecha_CotIns", header: "FECHA"),
-                            grid.Column(header: "⇨", format: (item) => Html.ActionLink("Ver", "Ver", new { }))
+                            grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" data-id="@item.id_CotIns">Asignar</button></text>)
+        //grid.Column(header: "⇨", format: (item) => Html.ActionLink("ASIGNAR", "AsignarCotizacion", new { }))
+        //-->ModalInterno-->grid.Column(header: "⇨", format: @<text><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Asignar</button></text>)
+        //grid.Column(header: "⇨", format: (item) => Html.ActionLink( @<text><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Asignar</button></text>, "", new { })
+        //grid.Column(header: "⇨", format: (item) => Html.ActionLink(@<text><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Asignar</button></text>, "AsignarCotizacion"))
         )
     )
                 <div class="row">
@@ -161,6 +219,7 @@
                 @Html.Hidden("dir", grid.SortDirection)
                 @Html.Hidden("col", grid.SortColumn)
             </div>
+            <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
         </div>
     </div>
 }
