@@ -34,5 +34,11 @@ namespace SIC.Controllers
             }
             return View(u);
         }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
     }
 }

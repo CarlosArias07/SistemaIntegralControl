@@ -35,17 +35,6 @@
         })
     </script>
     <script>
-        /*$(document).ready(function () {
-            $('#showModal').click(function () {
-                var url = $('#caModal').data('url');
-
-                $.get(url, function (data) {
-                    $('#caContainer').html(data);
-
-                    $('#caModal').modal('show');
-                });
-            });
-        });*/
         $(document).on("click", ".name", function () {
                 var id_CotIns = $(this).data('id');
                 var url = $('#caModal').data('url');
@@ -152,26 +141,6 @@
                 <div id='caContainer'>
                 </div>
             </div>
-             <!--Modal 
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog modal-lg">
-
-                     Modal content
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">COTIZACIÓN</h4><span class="pull-right">H</span>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" value="" />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>-->
             <h3 class="box-title">Cotizaciones Pendientes de Asignación</h3>
 
             <nav class="navbar navbar-default">

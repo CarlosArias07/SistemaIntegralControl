@@ -8,7 +8,7 @@
     public partial class DbModel : DbContext
     {
         public DbModel()
-            : base("name=DbModel5")
+            : base("name=DbModel8")
         {
         }
 
@@ -19,6 +19,7 @@
         public virtual DbSet<empleados_asignados_instalacion> empleados_asignados_instalacion { get; set; }
         public virtual DbSet<empleados_venta_instalacion> empleados_venta_instalacion { get; set; }
         public virtual DbSet<niveles> niveles { get; set; }
+        public virtual DbSet<niveles_empleados> niveles_empleados { get; set; }
         public virtual DbSet<proveedores> proveedores { get; set; }
         public virtual DbSet<servicios_instalacion> servicios_instalacion { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
@@ -161,13 +162,13 @@
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<empleados>()
-                .HasOptional(e => e.usuarios)
-                .WithRequired(e => e.empleados);
+                .HasMany(e => e.niveles_empleados)
+                .WithRequired(e => e.empleados)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<empleados>()
-                .HasMany(e => e.niveles)
-                .WithMany(e => e.empleados)
-                .Map(m => m.ToTable("niveles_empleados").MapLeftKey("id_Emp").MapRightKey("id_Niv"));
+                .HasOptional(e => e.usuarios)
+                .WithRequired(e => e.empleados);
 
             modelBuilder.Entity<empleados_venta_instalacion>()
                 .Property(e => e.totalventa_EmpVenIns)
@@ -191,6 +192,11 @@
 
             modelBuilder.Entity<niveles>()
                 .HasMany(e => e.empleados_venta_instalacion)
+                .WithRequired(e => e.niveles)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<niveles>()
+                .HasMany(e => e.niveles_empleados)
                 .WithRequired(e => e.niveles)
                 .WillCascadeOnDelete(false);
 

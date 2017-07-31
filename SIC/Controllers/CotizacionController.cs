@@ -10,7 +10,7 @@ namespace SIC.Controllers
     public class CotizacionController : Controller
     {
         // GET: Cotizacion
-        public ActionResult VerCotizacionesAsignacion(int page = 1, string sort = "nombre_Emp", string sortdir = "asc", string search = "")
+        public ActionResult VerCotizacionesAsignacion(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -88,7 +88,7 @@ namespace SIC.Controllers
 
                 int page = 1;
                 string sort = "nombre_Emp";
-                string sortdir = "asc";
+                string sortdir = "desc";
                 string search = "";
                 int pageSize = 10;
                 int totalRecord = 0;
@@ -164,6 +164,82 @@ namespace SIC.Controllers
             }
             TempData["ConfirmationMessage"] = "No se pudo asignar al Empleado";
             return RedirectToAction("VerCotizacionesAsignacion");
+        }
+
+        //-------->EMPLEADOS<--------
+
+        public ActionResult VerCotizacionesPendientesEmp(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        {
+            int idEmp = Convert.ToInt32(Session["idEmp"]);
+            int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
+
+            ViewBag.idemp = idEmp;
+            ViewBag.tipousu = tipoUsu;
+
+            if (tipoUsu == 1)
+            {
+                ViewBag.tusu = "Administrador";
+            }
+            else
+            {
+                ViewBag.tusu = "Empleado";
+            }
+
+            using (DbModel db = new DbModel())
+            {
+                var v = db.empleados.Where(a => a.id_Emp.Equals(idEmp)).FirstOrDefault();
+                ViewBag.nombreemp = v.nombre_Emp;
+            }
+
+            //WebGridCotizaciones
+            int pageSize = 10;
+            int totalRecord = 0;
+            if (page < 1) page = 1;
+            int skip = (page * pageSize) - pageSize;
+            var data = cargarCotizacionesPendientesEmp(search, sort, sortdir, skip, pageSize, out totalRecord);
+            ViewBag.TotalRows = totalRecord;
+            ViewBag.Search = search;
+
+            return View(data);
+        }
+
+        public List<cotizaciones_info> cargarCotizacionesPendientesEmp(string search, string sort, string sortdir, int skip, int pageSize, out int totalRecord)
+        {
+            int idEmp = Convert.ToInt32(Session["idEmp"]);
+            using (DbModel db = new DbModel())
+            {
+                var v = (from a in db.cotizaciones_info
+
+                         where
+                            (a.tipo_Pro.Contains(search) ||
+                            a.nombre_Emp.Contains(search) ||
+                            a.nombre_Art.Contains(search)) &&
+                            a.estatus_CotIns == 0 &&
+                            a.id_Emp == idEmp
+                         select a
+                         );
+                totalRecord = v.Count();
+                v = v.OrderBy(sort + " " + sortdir);
+                if (pageSize > 0)
+                {
+                    v = v.Skip(skip).Take(pageSize);
+                }
+                return v.ToList();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerCotizacionesPendientesDEmp(string id)
+        {
+            int Id = Convert.ToInt32(id);
+            using (DbModel db = new DbModel())
+            {
+                var model = (from a in db.cotizaciones_info
+                             where a.id_CotIns == Id
+                             select a).ToList();
+
+                return PartialView(model);
+            }
         }
     }
 }

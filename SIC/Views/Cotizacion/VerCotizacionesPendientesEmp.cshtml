@@ -1,6 +1,6 @@
 ﻿@model List<SIC.cotizaciones_info>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "VerCotizacionesPendientesEmp";
     var grid = new WebGrid(canPage: true, rowsPerPage: 2);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
@@ -46,7 +46,7 @@
                 </form>
             </li>
             <li>
-                <a class="profile-pic" href="#"><img src="data:image/jpeg;base64,@SIC.Controllers.IndexController.ConvertByteArrayToBase64(@ViewBag.idemp)" alt="Usuario" height="36" width="36" class="img-circle"><!-- <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">--><b>@ViewBag.nombreemp</b></a>
+                <a class="profile-pic" href="#"> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
             </li>
         </ul>
 }
@@ -54,7 +54,7 @@
 @section EditSubtop {
 
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Inicio</h4>
+        <h4 class="page-title">Cotizaciones</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
@@ -62,7 +62,6 @@
             <li class="active">@ViewBag.tusu</li>
         </ol>
     </div>
-
 }
 
 @section EditMenu{
@@ -74,7 +73,7 @@
                 <a href="@Url.Action("Index", "Index")" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
             </li>
             <li>
-                <a  class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+                <a class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
                 <ul>
                     <li><a href="@Url.Action("RegistrarEmpleados", "Empleado")"> Registrar</a></li>
                     <li><a href="@Url.Action("VerEmpleados", "Empleado")"> Consultar</a></li>
@@ -101,7 +100,7 @@
                 <a class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
                 <ul>
                     <li><a href="@Url.Action("VerCotizacionesAsignacion", "Cotizacion")"> Pendientes de Asignación</a></li>
-                    <li><a href="#"> Aceptadas</a></li>
+                    <li><a href="#"> Pendientes de Confirmar</a></li>
                     <li><a href="#"> Canceladas</a></li>
                 </ul>
             </li>
@@ -124,7 +123,10 @@
                 </ul>
             </li>
             <li>
-                <a href="@Url.Action("Logout", "Login")" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Cerrar Sesión</a>
+                <a class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi Cuenta</a>
+                <ul>
+                    <li><a href="#"> Configuración</a></li>
+                </ul>
             </li>
         </ul>
     }
@@ -132,69 +134,32 @@
 
 @section EditContent{
 
-    @if (ViewBag.tipousu == 2)
-    {
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">TOTAL VENDIDO</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">$@ViewBag.total</span></li>
-                    </ul>
+    <div class="col-md-12">
+        <div class="white-box">
+            <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerCotizacionesPendientesDEmp")'>
+                <div id='caContainer'>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">VENTAS</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash2"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">@ViewBag.ventas</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">NIVEL ACTUAL</h3>
-                    <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash3"></div>
-                        </li>
-                        <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">@ViewBag.nivel</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <div class="white-box">
-                        <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerCotizacionesAceptadas")'>
-                            <div id='caContainer'>
+            <h3 class="box-title">Cotizaciones Pendientes de Aceptación</h3>
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div>
+                        <a href="#" class="navbar-brand">Buscar</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        @using (Html.BeginForm("VerCotizacionesPendientesEmp", "Cotizacion", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
                             </div>
-                        </div>
-                        <h3 class="box-title">COTIZACIONES ACEPTADAS EN ESTA QUINCENA</h3>
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div>
-                                    <a href="#" class="navbar-brand">Buscar</a>
-                                </div>
-                                <div class="collapse navbar-collapse">
-                                    @using (Html.BeginForm("Index", "Index", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
-                                    {
-                                        <div class="form-group">
-                                            <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
-                                        </div>
-                                        <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
-                                    }
-                                </div>
-                            </div>
-                        </nav>
-                        <div>
-                            @grid.Table(
+                            <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                        }
+                    </div>
+                </div>
+            </nav>
+            <div>
+                @grid.Table(
                         tableStyle: "table table-responsive table-bordered",
                         headerStyle: "webgrid-header",
                         footerStyle: "webgrid-footer",
@@ -210,16 +175,15 @@
                             grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" data-id="@item.id_CotIns">Detalles</button></text>)
         )
     )
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    @grid.Pager(mode: WebGridPagerModes.All)
-                                </div>
-                            </div>
-                            @Html.Hidden("dir", grid.SortDirection)
-                            @Html.Hidden("col", grid.SortColumn)
-                        </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        @grid.Pager(mode: WebGridPagerModes.All)
                     </div>
                 </div>
+                @Html.Hidden("dir", grid.SortDirection)
+                @Html.Hidden("col", grid.SortColumn)
             </div>
-    }
+        </div>
+    </div>
 }
+

@@ -874,6 +874,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="niveles.cs" />
+    <Compile Include="niveles_empleados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="proveedores.cs" />
     <Compile Include="servicios_instalacion.cs" />
@@ -902,6 +903,9 @@
     <Content Include="Views\Cotizacion\VerCotizacionesAsignacion.cshtml" />
     <Content Include="Views\Cotizacion\AsignarCotizacion.cshtml" />
     <Content Include="Views\Cotizacion\AsignarCotizaciones.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesAceptadas.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesPendientesEmp.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesPendientesDEmp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

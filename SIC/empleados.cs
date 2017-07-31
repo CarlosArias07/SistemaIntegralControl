@@ -14,7 +14,7 @@ namespace SIC
             cotizaciones_instalacion = new HashSet<cotizaciones_instalacion>();
             empleados_asignados_instalacion = new HashSet<empleados_asignados_instalacion>();
             empleados_venta_instalacion = new HashSet<empleados_venta_instalacion>();
-            niveles = new HashSet<niveles>();
+            niveles_empleados = new HashSet<niveles_empleados>();
         }
 
         [Key]
@@ -94,9 +94,9 @@ namespace SIC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<empleados_venta_instalacion> empleados_venta_instalacion { get; set; }
 
-        public virtual usuarios usuarios { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<niveles> niveles { get; set; }
+        public virtual ICollection<niveles_empleados> niveles_empleados { get; set; }
+
+        public virtual usuarios usuarios { get; set; }
     }
 }

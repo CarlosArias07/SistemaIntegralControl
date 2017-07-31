@@ -63,19 +63,25 @@ namespace SIC.Controllers
                             e.estatus_Emp = 1;
                             e.img_Emp = new byte[img.ContentLength];
                             img.InputStream.Read(e.img_Emp, 0, img.ContentLength);
-                            /*byte[] imagen = new byte[img.ContentLength];
-                            int readresult = img.InputStream.Read(imagen, 0, img.ContentLength);
-                            e.img_Emp = imagen;*/
                             db.empleados.Add(e);
                             db.SaveChanges();
 
-                            if (e.tipo_Emp.Equals("V"))
+                            if (e.tipo_Emp.Equals("V") || e.tipo_Emp.Equals("T"))
                             {
                                 usuarios u = new usuarios();
                                 u.id_Emp = e.id_Emp;
                                 u.contraseña_Usu = "xxxx";
                                 u.tipo_Usu = 2;
                                 db.usuarios.Add(u);
+                                db.SaveChanges();
+                            }
+
+                            if (e.tipo_Emp.Equals("V"))
+                            {
+                                niveles_empleados ne = new niveles_empleados();
+                                ne.id_Emp = e.id_Emp;
+                                ne.id_Niv = 1;
+                                db.niveles_empleados.Add(ne);
                                 db.SaveChanges();
                             }
 
@@ -157,32 +163,12 @@ namespace SIC.Controllers
             }
         }
 
-        /*public ActionResult cargarEmpleados()
+        public static String ConvertByteArrayToBase64(int id)
         {
             using (DbModel db = new DbModel())
             {
-                //db.Configuration.LazyLoadingEnabled = false;
-                //IQueryable<usuarios> q = db.usuarios.OrderBy(a => a.id_Emp);
-                //var datos = db.niveles.OrderBy(a => a.id_Niv).ToList();
-                var datos = db.niveles.Select(a => new
-                {
-                    a.id_Niv,
-                    a.descripcion_Niv,
-                    a.pcomision_Niv,
-                    a.venta_Niv,
-                }).ToList();
-                /*var datos = db.empleados.Select(a => new
-                {
-                    id_Emp = a.id_Emp,
-                    nombre_Emp = a.nombre_Emp,
-                    apaterno_Emp = a.apaterno_Emp,
-                    tipo_Emp = a.tipo_Emp,
-                    correo_Emp = a.correo_Emp
-                }).ToList();
-                return Json(new { datos = datos }, JsonRequestBehavior.AllowGet);
-                //JavaScriptSerializer js = new JavaScriptSerializer();
-                //return Json(Context), JsonRequestBehavior.AllowGet);
+                return Convert.ToBase64String(db.empleados.Where(c => c.id_Emp == id).First().img_Emp);
             }
-        }*/
+        }
     }
 }
