@@ -10,7 +10,7 @@ namespace SIC.Controllers
     public class IndexController : Controller
     {
         // GET: Index
-        public ActionResult Index(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        public ActionResult Index(int page = 1, string sort = "id_CotIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);

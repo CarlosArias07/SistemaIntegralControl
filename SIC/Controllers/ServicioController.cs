@@ -10,7 +10,7 @@ namespace SIC.Controllers
     public class ServicioController : Controller
     {
         // GET: Servicio
-        public ActionResult VerServiciosEnDesarrollo(int page = 1, string sort = "finicio", string sortdir = "desc", string search = "")
+        public ActionResult VerServiciosEnDesarrollo(int page = 1, string sort = "id_SerIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -90,7 +90,7 @@ namespace SIC.Controllers
             }
         }
 
-        public ActionResult VerServiciosSinIniciar(int page = 1, string sort = "finicio", string sortdir = "desc", string search = "")
+        public ActionResult VerServiciosSinIniciar(int page = 1, string sort = "id_SerIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -162,7 +162,7 @@ namespace SIC.Controllers
             }
         }
 
-        public ActionResult VerServiciosFinalizados(int page = 1, string sort = "ffinal", string sortdir = "desc", string search = "")
+        public ActionResult VerServiciosFinalizados(int page = 1, string sort = "id_SerIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);

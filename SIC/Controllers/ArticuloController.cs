@@ -71,7 +71,7 @@ namespace SIC.Controllers
 
         }
 
-        public ActionResult VerArticulos(int page = 1, string sort = "nombre_Pro", string sortdir = "asc", string search = "")
+        public ActionResult VerArticulos(int page = 1, string sort = "id_Art", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);

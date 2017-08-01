@@ -10,7 +10,7 @@ namespace SIC.Controllers
     public class CotizacionController : Controller
     {
         // GET: Cotizacion
-        public ActionResult VerCotizacionesAsignacion(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        public ActionResult VerCotizacionesAsignacion(int page = 1, string sort = "id_CotIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -166,7 +166,7 @@ namespace SIC.Controllers
             return RedirectToAction("VerCotizacionesAsignacion");
         }
 
-        public ActionResult VerCotizacionesPendientes(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        public ActionResult VerCotizacionesPendientes(int page = 1, string sort = "id_CotIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
@@ -240,7 +240,7 @@ namespace SIC.Controllers
 
         //-------->EMPLEADOS<--------
 
-        public ActionResult VerCotizacionesPendientesEmp(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        public ActionResult VerCotizacionesPendientesEmp(int page = 1, string sort = "id_CotIns", string sortdir = "desc", string search = "")
         {
             int idEmp = Convert.ToInt32(Session["idEmp"]);
             int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
