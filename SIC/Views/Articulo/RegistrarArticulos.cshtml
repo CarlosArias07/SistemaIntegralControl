@@ -114,20 +114,27 @@
             <h3 class="box-title">Registro de Artículos</h3>
             @using (Html.BeginForm("CrearArticulo", "Articulo", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <div class="form">
-                    <form>
-                        @Html.DropDownListFor(a => a.id_Pro, ViewBag.listpro as SelectList, "SELECCIONAR")
-                        @Html.DropDownListFor(a => a.tipo_Pro, ltipo, "SELECCIONAR")
-                        @Html.TextBoxFor(a => a.nombre_Pro, new { placeholder = "Nombre", @style = "text-transform:uppercase" })
-                        @Html.TextAreaFor(a => a.descripcion_Pro, new { placeholder = "Descripción Técnica", style = "text-transform:uppercase" })
-                        @Html.TextBoxFor(a => a.precio_Pro, new { placeholder = "0.00" })
-                        <br />
-                        @Html.LabelFor(a => a.imagen_Pro)
-                        <input type="file" id="img" name="img" />
-                        <br />
-                        <button type="submit" id="sbutton">Aceptar</button>
-                    </form>
-                </div>
+                <form class="container">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label style="color:#313131">Proveedor </label>@Html.DropDownListFor(a => a.id_Pro, ViewBag.listpro as SelectList, "SELECCIONAR", new { @class = "form form-control" })<br />
+                            <label style="color:#313131">Tipo Producto </label>@Html.DropDownListFor(a => a.tipo_Pro, ltipo, "SELECCIONAR", new { @class = "form form-control" })<br />
+                            <label style="color:#313131">Artículo </label> @Html.TextBoxFor(a => a.nombre_Pro, new { placeholder = "Nombre", @style = "text-transform:uppercase", @class = "form form-control" })<br />
+                            <label style="color:#313131">Descripción Técnica </label>@Html.TextAreaFor(a => a.descripcion_Pro, new { placeholder = "Descripción del artículo...", style = "text-transform:uppercase", @class = "form form-control" })<br />
+                            <label style="color:#313131">Precio </label>@Html.TextBoxFor(a => a.precio_Pro, new { placeholder = "0.00", @class = "form form-control" })<br />
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:3px">
+                                    @Html.LabelFor(a => a.imagen_Pro)
+                                    <span class="btn btn-default btn-file">
+                                        Cargar imagen... <input type="file" id="img" name="img" class="fileinput" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="sbutton" class="btn btn-success">Aceptar</button>
+
+                </form>
             }
         </div>
     </div>
