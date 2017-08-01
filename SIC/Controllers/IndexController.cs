@@ -32,6 +32,24 @@ namespace SIC.Controllers
                 var v = db.empleados.Where(a => a.id_Emp.Equals(idEmp)).FirstOrDefault();
                 ViewBag.nombreemp = v.nombre_Emp;
 
+                if (tipoUsu == 1)
+                {
+                    var x = (from b in db.empleados_venta_instalacion
+                             where b.considerada_EmpVenIns == 0
+                             select b).Count();
+                    ViewBag.ventas = x;
+
+                    var y = (from b in db.empleados
+                             where b.tipo_Emp == "V"
+                             select b).Count();
+
+                    ViewBag.vendedores = y;
+
+                    var t = db.empleados_venta_instalacion.Sum(i => i.totalventa_EmpVenIns);
+
+                    ViewBag.total = t;
+                }
+
                 if (tipoUsu == 2)
                 {
                     var x = (from b in db.empleados_venta_instalacion
