@@ -1,10 +1,8 @@
 ﻿@model List<SIC.cotizaciones_info>
 @{
     ViewBag.Title = "Index";
-    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
-    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+       
 }
-
 @section ScriptsDT{
 
     <script>
@@ -46,7 +44,8 @@
                 </form>
             </li>
             <li>
-                <a class="profile-pic" href="#"><img src="data:image/jpeg;base64,@SIC.Controllers.IndexController.ConvertByteArrayToBase64(@ViewBag.idemp)" alt="Usuario" height="36" width="36" class="img-circle"><!-- <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">--><b>@ViewBag.nombreemp</b></a>
+                <!--SIC.controllers lleva arroba y viewbag.idemp-->
+                <a class="profile-pic" href="#"><!--<img src="data:image/jpeg;base64,SIC.Controllers.IndexController.ConvertByteArrayToBase64(ViewBag.idemp)" alt="Usuario" height="36" width="36" class="img-circle">--> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
             </li>
         </ul>
 }
@@ -101,12 +100,12 @@
                 <a class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
                 <ul>
                     <li><a href="@Url.Action("VerCotizacionesAsignacion", "Cotizacion")"> Pendientes de Asignación</a></li>
-                    <li><a href="#"> Aceptadas</a></li>
+                    <li><a href="@Url.Action("VerCotizacionesPendientes", "Cotizacion")"> Pendientes de Aceptación</a></li>
                     <li><a href="#"> Canceladas</a></li>
                 </ul>
             </li>
             <li>
-                <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+                <a href="@Url.Action("Logout", "Login")" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Cerrar Sesión</a>
             </li>
         </ul>
     }
@@ -194,6 +193,11 @@
                             </div>
                         </nav>
                         <div>
+                            @{ 
+                                var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+                                grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+                            }
+
                             @grid.Table(
                         tableStyle: "table table-responsive table-bordered",
                         headerStyle: "webgrid-header",

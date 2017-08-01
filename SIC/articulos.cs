@@ -31,7 +31,6 @@ namespace SIC
         [StringLength(100)]
         public string descripcion_Pro { get; set; }
 
-        [Required]
         public byte[] imagen_Pro { get; set; }
 
         [Required]

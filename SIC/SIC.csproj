@@ -862,6 +862,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="cotizacionesInfo_empleados.cs" />
     <Compile Include="cotizaciones_info.cs" />
     <Compile Include="cotizaciones_instalacion.cs" />
@@ -877,6 +878,7 @@
     <Compile Include="niveles_empleados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="proveedores.cs" />
+    <Compile Include="servicios_info.cs" />
     <Compile Include="servicios_instalacion.cs" />
     <Compile Include="usuarios.cs" />
   </ItemGroup>
@@ -906,6 +908,8 @@
     <Content Include="Views\Cotizacion\VerCotizacionesAceptadas.cshtml" />
     <Content Include="Views\Cotizacion\VerCotizacionesPendientesEmp.cshtml" />
     <Content Include="Views\Cotizacion\VerCotizacionesPendientesDEmp.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesPendientes.cshtml" />
+    <Content Include="Views\Cotizacion\VerCotizacionesPendientesD.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -916,6 +920,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Servicio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

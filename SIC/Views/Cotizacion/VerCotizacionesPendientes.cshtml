@@ -1,0 +1,179 @@
+﻿@model List<SIC.cotizaciones_info>
+@{
+    ViewBag.Title = "VerCotizacionesPendientes";
+    var grid = new WebGrid(canPage: true, rowsPerPage: 2);
+    grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+    @section ScriptsDT{
+
+        <script>
+        $(function () {
+            try {
+                var dir = $('#dir').val();
+                var col = $('#col').val();
+                var header = $("th a[href*=" + col + "]");
+                if (dir == "Ascending") {
+                    header.text(header.text() + " ▲")
+                }
+                if (dir == "Descending") {
+                    header.text(header.text() + " ▼")
+                }
+            } catch (e) {
+
+            }
+        })
+        </script>
+        <script>
+        $(document).on("click", ".name", function () {
+                var id_CotIns = $(this).data('id');
+                var url = $('#caModal').data('url');
+                $.get(url, { id: id_CotIns }, function (data) {
+                    $('#caContainer').html(data);
+                    $('#caModal').modal('show');
+                });
+            });
+        </script>
+    }
+
+    @section EditTop{
+
+        <li>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li>
+                    <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                        <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+                    </form>
+                </li>
+                <li>
+                    <a class="profile-pic" href="#"> <img src="~/Content/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b>@ViewBag.nombreemp</b></a>
+                </li>
+            </ul>
+    }
+
+    @section EditSubtop {
+
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Cotizaciones</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li>Usuario</li>
+                <li class="active">@ViewBag.tusu</li>
+            </ol>
+        </div>
+    }
+
+    @section EditMenu{
+
+        @if (@ViewBag.tipousu == 1)
+    {
+            <ul class="nav" id="side-menu">
+                <li style="padding: 70px 0 0;">
+                    <a href="@Url.Action("Index", "Index")" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Inicio</a>
+                </li>
+                <li>
+                    <a class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Empleados</a>
+                    <ul>
+                        <li><a href="@Url.Action("RegistrarEmpleados", "Empleado")"> Registrar</a></li>
+                        <li><a href="@Url.Action("VerEmpleados", "Empleado")"> Consultar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Proveedores</a>
+                    <ul>
+                        <li><a href="@Url.Action("RegistrarProveedores", "Proveedor")"> Registrar</a></li>
+                        <li><a href="@Url.Action("VerProveedores", "Proveedor")"> Consultar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="waves-effect"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Artículos</a>
+                    <ul>
+                        <li><a href="@Url.Action("RegistrarArticulos", "Articulo")"> Registrar</a></li>
+                        <li><a href="@Url.Action("VerArticulos", "Articulo")"> Consultar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="profile.html" class="waves-effect"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>Servicios</a>
+                </li>
+                <li>
+                    <a class="waves-effect"><i class="fa fa-fax fa-fw" aria-hidden="true"></i>Cotizaciones</a>
+                    <ul>
+                        <li><a href="@Url.Action("VerCotizacionesAsignacion", "Cotizacion")"> Pendientes de Asignación</a></li>
+                        <li><a href="@Url.Action("VerCotizacionesPendientes", "Cotizacion")"> Pendientes de Aceptación</a></li>
+                        <li><a href="#"> Canceladas</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout", "Login")" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Cerrar Sesión</a>
+                </li>
+            </ul>
+        }
+
+        @if (ViewBag.tipousu == 2)
+    {
+            <ul class="nav" id="side-menu">
+                <li style="padding: 70px 0 0;">
+                    <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Inicio</a>
+                </li>
+                <li>
+                    <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Mi cuenta</a>
+                </li>
+            </ul>
+        }
+    }
+
+    @section EditContent{
+
+        <div class="col-md-12">
+            <div class="white-box">
+                <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerCotizacionesPendientesD")'>
+                    <div id='caContainer'>
+                    </div>
+                </div>
+                <h3 class="box-title">Cotizaciones Pendientes de Aceptación</h3>
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div>
+                            <a href="#" class="navbar-brand">Buscar</a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            @using (Html.BeginForm("VerCotizacionesPendientes", "Cotizacion", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                            {
+                                <div class="form-group">
+                                    <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
+                                </div>
+                                <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                            }
+                        </div>
+                    </div>
+                </nav>
+                <div>
+                    @grid.Table(
+                        tableStyle: "table table-responsive table-bordered",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        rowStyle: "webgrid-row-style",
+                        columns: grid.Columns(
+                            grid.Column(header: "VENDEDOR", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.CotizacionController.ConvertByteArrayToBase64(@item.id_Emp)" alt="" height="80" width="70" class="img-circle">),
+                            grid.Column(columnName: "nombre_Emp", header: "NOMBRE"),
+                            grid.Column(columnName: "apaterno_Emp", header: "APELLIDO"),
+                            grid.Column(columnName: "nombre_Art", header: "ARTICULO"),
+                            grid.Column(columnName: "nombrecli_CotIns", header: "CLIENTE"),
+                            grid.Column(columnName: "fecha_CotIns", header: "FECHA"),
+                            grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" data-id="@item.id_CotIns">Detalles</button></text>)
+        )
+    )
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @grid.Pager(mode: WebGridPagerModes.All)
+                        </div>
+                    </div>
+                    @Html.Hidden("dir", grid.SortDirection)
+                    @Html.Hidden("col", grid.SortColumn)
+                </div>
+            </div>
+        </div>
+    }

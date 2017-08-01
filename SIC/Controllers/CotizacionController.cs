@@ -166,6 +166,78 @@ namespace SIC.Controllers
             return RedirectToAction("VerCotizacionesAsignacion");
         }
 
+        public ActionResult VerCotizacionesPendientes(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")
+        {
+            int idEmp = Convert.ToInt32(Session["idEmp"]);
+            int tipoUsu = Convert.ToInt32(Session["tipoUsu"]);
+
+            ViewBag.idemp = idEmp;
+            ViewBag.tipousu = tipoUsu;
+
+            if (tipoUsu == 1)
+            {
+                ViewBag.tusu = "Administrador";
+            }
+            else
+            {
+                ViewBag.tusu = "Empleado";
+            }
+
+            using (DbModel db = new DbModel())
+            {
+                var v = db.empleados.Where(a => a.id_Emp.Equals(idEmp)).FirstOrDefault();
+                ViewBag.nombreemp = v.nombre_Emp;
+            }
+
+            //WebGridCotizacionesPendientesAceptacion
+            int pageSize = 10;
+            int totalRecord = 0;
+            if (page < 1) page = 1;
+            int skip = (page * pageSize) - pageSize;
+            var data = cargarCotizacionesPendientes(search, sort, sortdir, skip, pageSize, out totalRecord);
+            ViewBag.TotalRows = totalRecord;
+            ViewBag.Search = search;
+
+            return View(data);
+        }
+
+        public List<cotizaciones_info> cargarCotizacionesPendientes(string search, string sort, string sortdir, int skip, int pageSize, out int totalRecord)
+        {
+            using (DbModel db = new DbModel())
+            {
+                var v = (from a in db.cotizaciones_info
+
+                         where
+                            (a.tipo_Pro.Contains(search) ||
+                            a.nombre_Emp.Contains(search) ||
+                            a.nombre_Art.Contains(search)) &&
+                            a.estatus_CotIns == 0
+                         select a
+                         );
+                totalRecord = v.Count();
+                v = v.OrderBy(sort + " " + sortdir);
+                if (pageSize > 0)
+                {
+                    v = v.Skip(skip).Take(pageSize);
+                }
+                return v.ToList();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerCotizacionesPendientesD(string id)
+        {
+            int Id = Convert.ToInt32(id);
+            using (DbModel db = new DbModel())
+            {
+                var model = (from a in db.cotizaciones_info
+                             where a.id_CotIns == Id
+                             select a).ToList();
+
+                return PartialView(model);
+            }
+        }
+
         //-------->EMPLEADOS<--------
 
         public ActionResult VerCotizacionesPendientesEmp(int page = 1, string sort = "fecha_CotIns", string sortdir = "desc", string search = "")

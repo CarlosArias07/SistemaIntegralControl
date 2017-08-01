@@ -85,63 +85,207 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title active"><b>ASIGNAR COTIZACIÓN</b></h4> &nbsp;&nbsp;&nbsp;<button type="button">H</button>
+                <button type="button" class="cerrar" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title active" style="color:deepskyblue">
+                    <b>
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        ASIGNAR COTIZACIÓN
+                    </b>
+                </h4>
             </div>
             <div class="modal-body">
-                <p>Detalles de la Cotización</p>
+                <p style="color:#337ab7;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b> Detalles de la Cotización</b>
+                </p>
                 @{
 
                     foreach (var item in Model.Model1)
                     {
-                            <label>Código: </label><input type="text" id="idcot" value="@item.id_CotIns" readonly />
-                            <label>Fecha: </label><input type="text" value="@item.fecha_CotIns" readonly/>
-                            <br />
-                            <br />
-                            <p class="active">Vendedor</p>
-                            <label>Nombre: </label><input type="text" value="@item.nombre_Emp" readonly/>
-                            <br />
-                            <label>A Paterno: </label><input type="text" value="@item.apaterno_Emp" readonly />
-                            <br />
-                            <br />
-                            <p>Artículo</p>
-                            <img src="data:image/jpeg;base64,@SIC.Controllers.ArticuloController.ConvertByteArrayToBase64(@item.id_Art)" alt="" height="100" width="100" class="img-thumbnail">
-                            <br />
-                            <br />
-                            <label>Tipo:</label><input type="text" value="@item.tipo_Pro"  readonly />
-                            <br />
-                            <label>Nombre:</label><input type="text" value="@item.nombre_Pro"  readonly />
-                            <br />
-                            <br />
-                            <p class="active">Otros</p>
-                            <label>Metros cable:</label><input type="text" value="@item.mtscable_CotIns" readonly />
-                            <br />
-                            <label>Total cable:</label><input type="text" value="@item.totalcable_CotIns" readonly />
-                            <br />
-                            <label>Observaciones:</label><input type="text" value="@item.observaciones_CotIns" readonly />
-                            <br />
-                            <label>Total $:</label><input type="text" value="@item.total_CotIns"  readonly />
-                            <br />
-                            <label>Complejidad :</label><input type="text" value="@item.complejidad_CotIns"  readonly />
-                            <br />
-                            <br />
-                            <p>Cliente</p>
-                            <label>Nombre:</label><input type="text" value="@item.nombrecli_CotIns"  readonly />
-                            <br />
-                            <label>Teléfono:</label><input type="text" value="@item.telefonocli_CotIns"  readonly />
-                            <br />
-                            <label>Domicilio:</label><input type="text" value="@item.domiciliocli_CotIns" readonly />
-                            <br />
-                            <label>Correo:</label><input type="text" value="@item.correocli_CotIns" readonly />
-                            <br />
+                        <label>
+                            Código:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label><label>Fecha:</label><br />
+                                            <input type="text" id="idcot" value="@item.id_CotIns" readonly />
+                                            <label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.fecha_CotIns" readonly />
+                                            <br />
+                                            <br />
+                                            @*----------------------------------------------------------------*@
+                                            <p class="active" style="color:#337ab7;">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Vendedor</b>
+                                            </p>
+                                            <label>
+                                                Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Apellido Paterno:</label><br />
+                                            <input type="text" value="@item.nombre_Emp" readonly /><label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.apaterno_Emp" readonly />
+                                            <br />
+                                            <br />
+                                            @*----------------------------------------------------------------*@
+                                            <p style="color:#337ab7;">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Artículo</b>
+                                            </p>
+                                            <label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label> <img src="data:image/jpeg;base64,@SIC.Controllers.ArticuloController.ConvertByteArrayToBase64(@item.id_Art)" alt="" height="200" width="200" class="img-thumbnail">
+                                            <br />
+                                            <br />
+                                            <label>
+                                                Tipo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Nombre:</label><br />
+                                            <input type="text" value="@item.tipo_Pro" readonly />
+                                            <label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.nombre_Pro" readonly />
+                                            <br />
+                                            <br />
+                                            @*--------------------------------------------------------------*@
+                                            <p class="active" style="color:#337ab7;">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Otros</b>
+                                            </p>
+
+                                            <label>
+                                                Metros cable:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;
+                                            </label><label>Total cable:</label><br />
+                                            <input type="text" value="@item.mtscable_CotIns" readonly /><label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.totalcable_CotIns" readonly />
+                                            <br />
+                                            <br />
+                                            @*--------------------------------------------------------------*@
+                                            <label>
+                                                Total cable:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Observaciones:</label><br />
+                                            <input type="text" value="@item.totalcable_CotIns" readonly /><label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.observaciones_CotIns" readonly /><br />
+                                            <br />
+                                            @*--------------------------------------------------------------*@
+                                            <label>
+                                                Complejidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Total $:</label><br />
+                                            <input type="text" value="@item.complejidad_CotIns" readonly /><label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.total_CotIns" readonly />
+                                            <br />
+                                            <br />
+                                            @*--------------------------------------------------------------*@
+                                            <p style="color:#337ab7;">
+                                                <b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cliente
+                                                </b>
+                                            </p>
+                                            <label>
+                                                Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Teléfono:</label><br />
+                                            <input type="text" value="@item.nombrecli_CotIns" readonly />
+                                            <label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.telefonocli_CotIns" readonly /><br />
+                                            <br />
+                                            <label>
+                                                Domicilio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label><label>Correo:</label><br />
+                                            <input type="text" value="@item.domiciliocli_CotIns" readonly />
+                                            <label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <input type="text" value="@item.correocli_CotIns" readonly /><br />
+                                            <br />
                     }
+
                 }
+
+                @*----------------------------*@
                 <br />
                 <br />
-                <p>Técnicos para Asignación</p>
+                <p style="color:#337ab7;">
+                    <b>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Técnicos para Asignación
+                    </b>
+                </p>
                 <div>
                     @grid.Table(
-                  
+
                         tableStyle: "webgrid-table",
                         headerStyle: "webgrid-header",
                         footerStyle: "webgrid-footer",
@@ -165,9 +309,9 @@
                 </div>
 
             </div>
+
             <div class="modal-footer">
                 <p class="dt-body-left">
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                 </p>
             </div>
         </div>

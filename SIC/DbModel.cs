@@ -8,7 +8,7 @@
     public partial class DbModel : DbContext
     {
         public DbModel()
-            : base("name=DbModel8")
+            : base("name=DbModel9")
         {
         }
 
@@ -24,6 +24,7 @@
         public virtual DbSet<servicios_instalacion> servicios_instalacion { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<cotizaciones_info> cotizaciones_info { get; set; }
+        public virtual DbSet<servicios_info> servicios_info { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -284,6 +285,66 @@
 
             modelBuilder.Entity<cotizaciones_info>()
                 .Property(e => e.complejidad_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.nombre_EmpV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.apaterno_EmpV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.nombre_Pro)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.tipo_Pro)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.nombre_Art)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.mtscable_CotIns)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.totalcable_CotIns)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.observaciones_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.total_CotIns)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.nombrecli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.domiciliocli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.correocli_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.complejidad_CotIns)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.nombre_EmpT)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<servicios_info>()
+                .Property(e => e.apaterno_EmpT)
                 .IsUnicode(false);
         }
     }
