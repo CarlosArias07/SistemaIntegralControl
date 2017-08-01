@@ -910,6 +910,8 @@
     <Content Include="Views\Cotizacion\VerCotizacionesPendientesDEmp.cshtml" />
     <Content Include="Views\Cotizacion\VerCotizacionesPendientes.cshtml" />
     <Content Include="Views\Cotizacion\VerCotizacionesPendientesD.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosEnDesarrollo.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosEnDesarrolloD.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -920,7 +922,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Servicio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

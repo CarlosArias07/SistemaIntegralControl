@@ -1,11 +1,11 @@
-﻿@model List<SIC.proveedores>
+﻿@model List<SIC.servicios_info>
 @{
-    ViewBag.Title = "VerProveedores";
+    ViewBag.Title = "VerServiciosEnDesarrollo";
     var grid = new WebGrid(canPage: true, rowsPerPage: 2);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
 
-@section Scripts{
+@section ScriptsDT{
 
     <script>
         $(function () {
@@ -23,6 +23,16 @@
 
             }
         })
+    </script>
+    <script>
+        $(document).on("click", ".name", function () {
+                var id_CotIns = $(this).data('id');
+                var url = $('#caModal').data('url');
+                $.get(url, { id: id_CotIns }, function (data) {
+                    $('#caContainer').html(data);
+                    $('#caModal').modal('show');
+                });
+            });
     </script>
 }
 
@@ -44,7 +54,7 @@
 @section EditSubtop {
 
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Proveedores</h4>
+        <h4 class="page-title">Servicios</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
@@ -121,16 +131,19 @@
 
     <div class="col-md-12">
         <div class="white-box">
-            <h3 class="box-title">Gestión de Proveedores</h3>
+            <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerServiciosEnDesarrolloD")'>
+                <div id='caContainer'>
+                </div>
+            </div>
+            <h3 class="box-title">Servicios en Desarrollo</h3>
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div>
                         <a href="#" class="navbar-brand">Buscar</a>
-                        <span class="pull-right"><button class="btn btn-info">Reestablecer</button></span>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @using (Html.BeginForm("VerProveedores", "Proveedor", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        @using (Html.BeginForm("VerServiciosEnDesarrollo", "Servicio", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
                             <div class="form-group">
                                 <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
@@ -148,11 +161,13 @@
                         alternatingRowStyle: "webgrid-alternating-row",
                         rowStyle: "webgrid-row-style",
                         columns: grid.Columns(
-                            grid.Column(columnName: "nombre_Pro", header: "Nombre"),
-                            grid.Column(columnName: "giro_Pro", header: "Giro"),
-                            grid.Column(columnName: "direccion_Pro", header: "Dirección"),
-                            grid.Column(columnName: "pagweb_Pro", header: "Sitio Web"),
-                            grid.Column(header: "⇨", format: (item) => Html.ActionLink("Ver", "Ver", new { }))
+                            grid.Column(header: "TÉCNICO", format: @<img src="data:image/jpeg;base64,@SIC.Controllers.ServicioController.ConvertByteArrayToBase64(@item.id_EmpT)" alt="" height="80" width="70" class="img-circle">),
+                            grid.Column(columnName: "nombre_EmpT", header: "NOMBRE"),
+                            grid.Column(columnName: "apaterno_EmpT", header: "APELLIDO"),
+                            grid.Column(columnName: "nombre_Art", header: "ARTICULO"),
+                            grid.Column(columnName: "nombrecli_CotIns", header: "CLIENTE"),
+                            grid.Column(columnName: "finicio", header: "FECHA DE COMIENZO"),
+                            grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" data-id="@item.id_SerIns">Detalles</button></text>)
         )
     )
                 <div class="row">
@@ -166,3 +181,4 @@
         </div>
     </div>
 }
+

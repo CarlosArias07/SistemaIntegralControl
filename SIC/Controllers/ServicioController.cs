@@ -53,7 +53,6 @@ namespace SIC.Controllers
 
                          where
                             (a.tipo_Pro.Contains(search) ||
-                            a.nombre_EmpV.Contains(search) ||
                             a.nombre_EmpT.Contains(search) ||
                             a.nombre_Art.Contains(search)) &&
                             a.estatus_SerIns == 1
@@ -66,6 +65,28 @@ namespace SIC.Controllers
                     v = v.Skip(skip).Take(pageSize);
                 }
                 return v.ToList();
+            }
+        }
+
+        public static String ConvertByteArrayToBase64(int id)
+        {
+            using (DbModel db = new DbModel())
+            {
+                return Convert.ToBase64String(db.empleados.Where(c => c.id_Emp == id).First().img_Emp);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VerServiciosEnDesarrolloD(string id)
+        {
+            int Id = Convert.ToInt32(id);
+            using (DbModel db = new DbModel())
+            {
+                var model = (from a in db.servicios_info
+                             where a.id_SerIns == Id
+                             select a).ToList();
+
+                return PartialView(model);
             }
         }
     }
