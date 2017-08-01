@@ -221,7 +221,7 @@ namespace SIC.Controllers
         }
 
         [HttpGet]
-        public ActionResult VerServiciosSinIniciarD(string id)
+        public ActionResult VerServiciosFinalizadosD(string id)
         {
             int Id = Convert.ToInt32(id);
             using (DbModel db = new DbModel())
