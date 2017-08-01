@@ -126,9 +126,17 @@ namespace SIC.Controllers
 
         public static String ConvertByteArrayToBase64(int id)
         {
+            string x = "";
             using (DbModel db = new DbModel())
             {
-                return Convert.ToBase64String(db.empleados.Where(c => c.id_Emp == id).First().img_Emp);
+                try
+                {
+                    return Convert.ToBase64String(db.empleados.Where(c => c.id_Emp == id).First().img_Emp);
+                }
+                catch
+                {
+                    return x;
+                }
             }
         }
     }
