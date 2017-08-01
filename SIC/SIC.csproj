@@ -912,6 +912,8 @@
     <Content Include="Views\Cotizacion\VerCotizacionesPendientesD.cshtml" />
     <Content Include="Views\Servicio\VerServiciosEnDesarrollo.cshtml" />
     <Content Include="Views\Servicio\VerServiciosEnDesarrolloD.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosSinIniciar.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosSinIniciarD.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
