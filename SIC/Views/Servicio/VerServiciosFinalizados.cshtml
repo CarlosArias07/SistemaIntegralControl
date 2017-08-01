@@ -1,6 +1,6 @@
 ﻿@model List<SIC.servicios_info>
 @{
-    ViewBag.Title = "VerServiciosEnDesarrollo";
+    ViewBag.Title = "VerServiciosFinalizados";
     var grid = new WebGrid(canPage: true, rowsPerPage: 2);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
@@ -132,11 +132,11 @@
 
     <div class="col-md-12">
         <div class="white-box">
-            <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerServiciosEnDesarrolloD")'>
+            <div id='caModal' class='modal fade' role="dialog" data-url='@Url.Action("VerServiciosFinalizadosD")'>
                 <div id='caContainer'>
                 </div>
             </div>
-            <h3 class="box-title">Servicios en Desarrollo</h3>
+            <h3 class="box-title">Servicios Finalizados</h3>
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -144,12 +144,12 @@
                         <a href="#" class="navbar-brand">Buscar</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @using (Html.BeginForm("VerServiciosEnDesarrollo", "Servicio", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        @using (Html.BeginForm("VerServiciosFinalizados", "Servicio", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
                             <div class="form-group">
                                 <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Filtro" />
                             </div>
-                                <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
+                            <button type="submit" value="Search" class="btn btn-success">Aceptar</button>
                         }
                     </div>
                 </div>
@@ -168,6 +168,7 @@
                             grid.Column(columnName: "nombre_Art", header: "ARTICULO"),
                             grid.Column(columnName: "nombrecli_CotIns", header: "CLIENTE"),
                             grid.Column(columnName: "finicio", header: "FECHA DE COMIENZO"),
+                            grid.Column(columnName: "ffinal", header: "FECHA DE FINALIZACIÓN"),
                             grid.Column(header: "⇨", format: @<text><button id="showModal" class="name btn btn-info" data-id="@item.id_SerIns">Detalles</button></text>)
         )
     )
@@ -182,4 +183,3 @@
         </div>
     </div>
 }
-

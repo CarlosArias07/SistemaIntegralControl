@@ -207,7 +207,7 @@ namespace SIC.Controllers
                             (a.tipo_Pro.Contains(search) ||
                             a.nombre_EmpT.Contains(search) ||
                             a.nombre_Art.Contains(search)) &&
-                            a.estatus_SerIns == 0
+                            a.estatus_SerIns == 2
                          select a
                          );
                 totalRecord = v.Count();

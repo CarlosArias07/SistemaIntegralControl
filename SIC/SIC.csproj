@@ -914,6 +914,8 @@
     <Content Include="Views\Servicio\VerServiciosEnDesarrolloD.cshtml" />
     <Content Include="Views\Servicio\VerServiciosSinIniciar.cshtml" />
     <Content Include="Views\Servicio\VerServiciosSinIniciarD.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosFinalizados.cshtml" />
+    <Content Include="Views\Servicio\VerServiciosFinalizadosD.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
